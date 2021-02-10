@@ -897,7 +897,7 @@ static const char *pednames[] = {
     "p_wom2",    "ct_man1",  "ct_man2",    "ct_wom1",    "ct_wom2",     "li_man1",     "li_man2",    "li_wom1",     "li_wom2", "docker1", "docker2",
     "scum_man",  "scum_wom", "worker1",    "worker2",    "b_man1",      "b_man2",      "b_man3",     "b_wom1",      "b_wom2",  "b_wom3",  "mod_man",
     "mod_wom",   "st_man",   "st_wom",     "fan_man1",   "fan_man2",    "fan_wom",     "hos_man",    "hos_wom",     "const1",  "const2",  "shopper1",
-    "shopper2",  "shopper3", "stud_man",   "stud_wom",   "cas_man",     "cas_wom",
+    "shopper2",  "shopper3", "stud_man",   "stud_wom",   "cas_man",     "cas_wom",     "busker1",    "busker2",     "busker3", "busker4"
 };
 
 //#include <list>
@@ -1010,7 +1010,7 @@ DebugMenuPopulate(void)
 			    if(playerId >= 26 && playerId <= 29 || playerId == 8) return;
 			    ChangePlayerModel(playerId);
 		    },
-		    1, 0, 82, pednames);
+		    1, 0, 86, pednames);
 		DebugMenuEntrySetWrap(e, true);
 		DebugMenuAddVarBool8("Player", "Invincible", &bCheatGodMode, nil);
 
