@@ -16,7 +16,7 @@
 #endif
 #define MENUHEADER_WIDTH 0.84f
 
-#define MENU_X_MARGIN -20.0f
+#define MENU_X_MARGIN -1.0f
 #define MENUACTION_POS_Y 60.0f
 #define MENUACTION_SCALE_MULT 0.9f
 

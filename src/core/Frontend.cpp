@@ -1076,7 +1076,6 @@ CMenuManager::Draw()
 	CFont::SetScale(MENU_X(0.48f), MENU_Y(1.0f));
 	CFont::SetRightJustifyOff();
 	CFont::SetColor(CRGBA(LABEL_COLOR.r, LABEL_COLOR.g, LABEL_COLOR.b, FadeIn(255)));
-
 	// Label
 	wchar *str;
 	if (aScreens[m_nCurrScreen].m_aEntries[0].m_Action == MENUACTION_LABEL) {
@@ -1429,6 +1428,9 @@ CMenuManager::Draw()
 			case MENUPAGE_START_MENU:
 				y = 140.0f;
 				break;
+			case MENUPAGE_DETECT_JOYSTICK:
+				y = 160.0f;
+				break;
 			case MENUPAGE_SOUND_SETTINGS:
 				y = 100.0f;
 				break;
@@ -1526,6 +1528,10 @@ CMenuManager::Draw()
 #endif
 					)
 						CFont::SetColor(CRGBA(DARKMENUOPTION_COLOR.r, DARKMENUOPTION_COLOR.g, DARKMENUOPTION_COLOR.b, FadeIn(255)));
+
+				float r = CFont::GetStringWidth(rightText, true);
+				if (r > SCREEN_SCALE_X(140.0f))
+					CFont::SetScale(MENU_X(0.48f * SCREEN_SCALE_X(160.0f) / r), MENU_Y(1.0f));
 
 				CFont::PrintString((itemX + l), itemY, rightText);
 			}

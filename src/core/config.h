@@ -208,8 +208,8 @@ enum Config {
 #	endif
 #define RANDOMSPLASH // use random splash as on PS2
 //#	define PC_PLAYER_CONTROLS	// mouse player/cam mode
-#	define GTA_REPLAY
-#	define GTA_SCENE_EDIT
+//#	define GTA_REPLAY
+//#	define GTA_SCENE_EDIT
 #elif defined GTA_XBOX
 #endif
 
@@ -307,7 +307,7 @@ enum Config {
 //#define PS2_HUD
 #define HUD_ENHANCEMENTS	// Adjusts some aspects to make the HUD look/behave a little bit better.
 #define BETA_SLIDING_TEXT
-#define TRIANGULAR_BLIPS	// height indicating triangular radar blips, as in VC
+//#define TRIANGULAR_BLIPS	// height indicating triangular radar blips, as in VC
 #define FIX_RADAR			// use radar size from early version before R* broke it
 // #define XBOX_SUBTITLES	// the infamous outlines
 #define RADIO_OFF_TEXT
