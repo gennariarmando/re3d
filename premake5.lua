@@ -308,8 +308,8 @@ project "re3d"
 		defines { "AUDIO_OAL" }
 	
 	filter {}
-	if(os.getenv("GTA_III_RE_DIR")) then
-		setpaths("$(GTA_III_RE_DIR)/", "%(cfg.buildtarget.name)")
+	if(os.getenv("GTA3D_RE_DIR")) then
+		setpaths("$(GTA3D_RE_DIR)/", "%(cfg.buildtarget.name)")
 	end
 	
 	filter "platforms:win*"
