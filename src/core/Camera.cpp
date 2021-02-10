@@ -66,6 +66,7 @@ bool CCamera::m_bUseMouse3rdPerson = true;
 bool CCamera::m_bUseMouse3rdPerson = false;
 #endif
 bool bDidWeProcessAnyCinemaCam;
+bool CCamera::m_bEnablePedCamRotation = false;
 
 #ifdef IMPROVED_CAMERA
 #define KEYJUSTDOWN(k) ControlsManager.GetIsKeyboardKeyJustDown((RsKeyCodes)k)

@@ -1104,30 +1104,34 @@ CCam::Process_FollowPed(const CVector &CameraTarget, float TargetOrientation, fl
 	}
 
 	// Look around
-	bool UseMouse = false;
-	float MouseX = CPad::GetPad(0)->GetMouseX();
-	float MouseY = CPad::GetPad(0)->GetMouseY();
-	float LookLeftRight, LookUpDown;
-	if((MouseX != 0.0f || MouseY != 0.0f) && !CPad::GetPad(0)->ArePlayerControlsDisabled()) {
-		UseMouse = true;
-		LookLeftRight = -2.5f * MouseX;
-		LookUpDown = 4.0f * MouseY;
-	} else {
-		LookLeftRight = -CPad::GetPad(0)->LookAroundLeftRight();
-		LookUpDown = CPad::GetPad(0)->LookAroundUpDown();
-	}
-	float AlphaOffset, BetaOffset;
-	if(UseMouse) {
-		BetaOffset = LookLeftRight * TheCamera.m_fMouseAccelHorzntl * FOV / 80.0f;
-		AlphaOffset = LookUpDown * TheCamera.m_fMouseAccelVertical * FOV / 80.0f;
-	} else {
-		BetaOffset = LookLeftRight * 0.01f * (1.0f / 14.0f) * FOV / 80.0f * CTimer::GetTimeStep();
-		AlphaOffset = LookUpDown * 0.01f * (0.6f / 14.0f) * FOV / 80.0f * CTimer::GetTimeStep();
-	}
+	if (TheCamera.m_bEnablePedCamRotation) {
+		bool UseMouse = false;
+		float MouseX = CPad::GetPad(0)->GetMouseX();
+		float MouseY = CPad::GetPad(0)->GetMouseY();
+		float LookLeftRight, LookUpDown;
+		if ((MouseX != 0.0f || MouseY != 0.0f) && !CPad::GetPad(0)->ArePlayerControlsDisabled()) {
+			UseMouse = true;
+			LookLeftRight = -2.5f * MouseX;
+			LookUpDown = 4.0f * MouseY;
+		}
+		else {
+			LookLeftRight = -CPad::GetPad(0)->LookAroundLeftRight();
+			LookUpDown = CPad::GetPad(0)->LookAroundUpDown();
+		}
+		float AlphaOffset, BetaOffset;
+		if (UseMouse) {
+			BetaOffset = LookLeftRight * TheCamera.m_fMouseAccelHorzntl * FOV / 80.0f;
+			AlphaOffset = LookUpDown * TheCamera.m_fMouseAccelVertical * FOV / 80.0f;
+		}
+		else {
+			BetaOffset = LookLeftRight * 0.01f * (1.0f / 14.0f) * FOV / 80.0f * CTimer::GetTimeStep();
+			AlphaOffset = LookUpDown * 0.01f * (0.6f / 14.0f) * FOV / 80.0f * CTimer::GetTimeStep();
+		}
 
-	if(BetaOffset) Rotating = false;
+		if (BetaOffset) Rotating = false;
 
-	Beta += BetaOffset;
+		Beta += BetaOffset;
+	}
 	while(Beta >= PI) Beta -= 2.0f * PI;
 	while(Beta < -PI) Beta += 2.0f * PI;
 

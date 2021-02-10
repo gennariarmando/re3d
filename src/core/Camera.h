@@ -552,6 +552,7 @@ public:
 #ifdef FREE_CAM
 	static bool bFreeCam;
 #endif
+	static bool m_bEnablePedCamRotation;
 
 	// High level and misc
 	CCamera(void);

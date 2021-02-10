@@ -331,7 +331,7 @@ enum Config {
 
 #	ifdef CUSTOM_FRONTEND_OPTIONS
 //#		define MENU_MAP			// VC-like menu map. Won't appear if you don't have our menu.txd
-#		define GRAPHICS_MENU_OPTIONS // otherwise Display settings will be scrollable
+//#		define GRAPHICS_MENU_OPTIONS // otherwise Display settings will be scrollable
 #		define NO_ISLAND_LOADING  // disable loadscreen between islands via loading all island data at once, consumes more memory and CPU
 #		define CUTSCENE_BORDERS_SWITCH
 #		define MULTISAMPLING		// adds MSAA option

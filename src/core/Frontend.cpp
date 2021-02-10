@@ -479,7 +479,7 @@ CMenuManager::ThingsToDoBeforeGoingBack()
 		if(option.m_CFODynamic->buttonPressFunc)
 			option.m_CFODynamic->buttonPressFunc(FEOPTION_ACTION_FOCUSLOSS);
 
-	if (option.m_Action == MENUACTION_CFO_SELECT && option.m_CFOSelect->onlyApplyOnEnter && option.m_CFOSelect->lastSavedValue != option.m_CFOSelect->displayedValue)
+	if ((option.m_Action == MENUACTION_CFO_SELECT || option.m_Action == MENUACTION_CFO_PEDCAMROT) && option.m_CFOSelect->onlyApplyOnEnter && option.m_CFOSelect->lastSavedValue != option.m_CFOSelect->displayedValue)
 		option.m_CFOSelect->displayedValue = *option.m_CFO->value = option.m_CFOSelect->lastSavedValue;
 
 	if (aScreens[m_nCurrScreen].returnPrevPageFunc) {
@@ -1377,8 +1377,9 @@ CMenuManager::Draw()
 #ifdef CUSTOM_FRONTEND_OPTIONS
 			case MENUACTION_CFO_DYNAMIC:
 			case MENUACTION_CFO_SELECT:
+			case MENUACTION_CFO_PEDCAMROT:
 				CMenuScreenCustom::CMenuEntry &option = aScreens[m_nCurrScreen].m_aEntries[i];
-				if(option.m_Action == MENUACTION_CFO_SELECT) {
+				if(option.m_Action == MENUACTION_CFO_SELECT || option.m_Action == MENUACTION_CFO_PEDCAMROT) {
 
 					isOptionDisabled = option.m_CFOSelect->disableIfGameLoaded && !m_bGameNotLoaded;
 					if(option.m_CFOSelect->onlyApplyOnEnter) {
@@ -1425,6 +1426,7 @@ CMenuManager::Draw()
 			case MENUPAGE_CHOOSE_DELETE_SLOT:
 				y = 80.0f;
 				break;
+			case MENUPAGE_OPTIONS: 
 			case MENUPAGE_START_MENU:
 				y = 140.0f;
 				break;
@@ -1435,8 +1437,9 @@ CMenuManager::Draw()
 				y = 100.0f;
 				break;
 			case MENUPAGE_DISPLAY_SETTINGS:
+#ifdef GRAPHICS_MENU_OPTIONS
 			case MENUPAGE_GRAPHICS_SETTINGS:
-			case MENUPAGE_OPTIONS: 
+#endif
 			case MENUPAGE_PAUSE_MENU:
 				y = 116.0f; 
 				break;
@@ -4822,10 +4825,11 @@ CMenuManager::ProcessButtonPresses(void)
 					return;
 #endif
 #ifdef CUSTOM_FRONTEND_OPTIONS
+				case MENUACTION_CFO_PEDCAMROT:
 				case MENUACTION_CFO_SELECT:
 				case MENUACTION_CFO_DYNAMIC:
 					CMenuScreenCustom::CMenuEntry &option = aScreens[m_nCurrScreen].m_aEntries[m_nCurrOption];
-					if (option.m_Action == MENUACTION_CFO_SELECT) {
+					if (option.m_Action == MENUACTION_CFO_SELECT || option.m_Action == MENUACTION_CFO_PEDCAMROT) {
 						if (option.m_CFOSelect->disableIfGameLoaded && !m_bGameNotLoaded)
 							break;
 
@@ -5063,10 +5067,11 @@ CMenuManager::ProcessButtonPresses(void)
 				SaveSettings();
 				break;
 #ifdef CUSTOM_FRONTEND_OPTIONS
+			case MENUACTION_CFO_PEDCAMROT:
 			case MENUACTION_CFO_SELECT:
 			case MENUACTION_CFO_DYNAMIC:
 				CMenuScreenCustom::CMenuEntry &option = aScreens[m_nCurrScreen].m_aEntries[m_nCurrOption];
-				if (option.m_Action == MENUACTION_CFO_SELECT) {
+				if (option.m_Action == MENUACTION_CFO_SELECT || option.m_Action == MENUACTION_CFO_PEDCAMROT) {
 					if (option.m_CFOSelect->disableIfGameLoaded && !m_bGameNotLoaded)
 						break;
 					
