@@ -383,6 +383,7 @@ template<int s, int t> struct check_size {
 #define norm(value, min, max) (((value) < (min)) ? 0 : (((value) > (max)) ? 1 : (((value) - (min)) / ((max) - (min)))))
 #define lerp(norm, min, max) ( (norm) * ((max) - (min)) + (min) )
 
+#define isNearlyEqualF(a, b, t) (ABS(a - b) <= t || ABS(a - b) >= t) ? TRUE : FALSE
 #define interpF(a, b, t) (t <= 0.5f ? (a + (b - a) * t) : (b - (b - a) * 1.0f - t))
 
 #define STRINGIFY(x)                    #x

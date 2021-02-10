@@ -467,7 +467,7 @@ RpClump* C3dMarkers::m_pRpClumpArray[NUMMARKERTYPES];
 
 float C3dMarkers::m_fBigArrowAlpha;
 bool C3dMarkers::m_fShow;
-CVector C3dMarkers::m_fArrowPoint;
+CVector C3dMarkers::m_vecArrowPoint;
 
 void
 C3dMarkers::Init()
@@ -667,8 +667,6 @@ C3dMarkers::PlaceBigArrow(CVector &posTarget)
 	RwRenderStateSet(rwRENDERSTATEZWRITEENABLE, (void *)TRUE);
 	RwRenderStateSet(rwRENDERSTATESHADEMODE, (void *)rwSHADEMODEGOURAUD);
 
-	RwV3d pos;
-	float w, h;
 	if(TheCamera.Cams[TheCamera.ActiveCam].Mode == CCam::MODE_TOP_DOWN_PED || TheCamera.Cams[TheCamera.ActiveCam].Mode == CCam::MODE_TOPDOWN) {
 		RwRenderStateSet(rwRENDERSTATEZWRITEENABLE, (void *)FALSE);
 		RwRenderStateSet(rwRENDERSTATEZTESTENABLE, (void *)FALSE);
@@ -681,36 +679,58 @@ C3dMarkers::PlaceBigArrow(CVector &posTarget)
 		CVector plr = FindPlayerCoors();
 		CVector target = posTarget;
 		float distX, distY;
-		CVector dimensions;
-		float dist;
+		float dist = (plr - posTarget).Magnitude2D();
 
-		dist = (plr - posTarget).Magnitude2D();
-
+		// That's not great, but it kind of works.
 		if(plr.x > target.x)
 			distX = ((CVector(target.x, 0.0f, target.z) - CVector(plr.x, 0.0f, plr.z)).Magnitude2D());
 		else
-			distX = -((CVector(target.x, 0.0f, target.z) - CVector(plr.x, 0.0f, plr.z)).Magnitude2D());
+			distX = -((CVector(target.x, 0.0f, target.z) - CVector(plr.x, 0.0f, plr.z)).Magnitude2D()) ;
 
 		if(plr.y > target.y)
 			distY = ((CVector(0.0f, target.y, target.z) - CVector(0.0f, plr.y, plr.z)).Magnitude2D());
 		else
 			distY = -((CVector(0.0f, target.y, target.z) - CVector(0.0f, plr.y, plr.z)).Magnitude2D());
 
-		CVector tempPoint;
-		if((plr - posTarget).Magnitude2D() > 10.0f)
-			tempPoint = CVector(plr.x - clamp((distX / dist), -2.0f, 2.0f), plr.y - clamp((distY / dist), -2.0f, 2.0f), plr.z);
+		distX *= 2.0f;
+		distY *= 2.0f;
+
+		if (FindPlayerVehicle()) {
+			CBaseModelInfo* mi = CModelInfo::GetModelInfo(FindPlayerVehicle()->GetModelIndex());
+			CVector Dimensions = mi->GetColModel()->boundingBox.max - mi->GetColModel()->boundingBox.min;
+
+			distX *= Dimensions.Magnitude2D() * 0.5f;
+			distY *= Dimensions.Magnitude2D() * 0.5f;
+		}
+		CVector a = CVector(plr.x - clamp((distX / dist), -4.0f, 4.0f), plr.y - clamp((distY / dist), -4.0f, 4.0f), plr.z);
+		CVector b = posTarget;
+		CVector interpPoint = (dist > 14.0f ? a : b);
+		static bool interp = false;
+
+		if (!interp && (dist > 0.0f && dist < 14.0f + 1.0f)) {
+			interpPoint = (dist > 14.0f ? a : b);
+			interp = true;
+		}
+
+		if (interp) {
+			m_vecArrowPoint.x = interpF(m_vecArrowPoint.x, interpPoint.x, CTimer::GetTimeStep() * 0.2f);
+			m_vecArrowPoint.y = interpF(m_vecArrowPoint.y, interpPoint.y, CTimer::GetTimeStep() * 0.2f);
+			m_vecArrowPoint.z = interpF(m_vecArrowPoint.z, interpPoint.z, CTimer::GetTimeStep() * 0.2f);
+
+			if (isNearlyEqualF(m_vecArrowPoint.x, interpPoint.x, 0.1f) &&
+				isNearlyEqualF(m_vecArrowPoint.x, interpPoint.y, 0.1f))
+				interp = false;
+		}
 		else
-			tempPoint = posTarget;
+			m_vecArrowPoint = interpPoint;
 
-		m_fArrowPoint.x = interpF(m_fArrowPoint.x, tempPoint.x, CTimer::GetTimeStep() * 0.2f);
-		m_fArrowPoint.y = interpF(m_fArrowPoint.y, tempPoint.y, CTimer::GetTimeStep() * 0.2f);
-		m_fArrowPoint.z = interpF(m_fArrowPoint.z, tempPoint.z, CTimer::GetTimeStep() * 0.2f);
-
-		if(CSprite::CalcScreenCoors(m_fArrowPoint, &pos, &w, &h, false) && CHud::m_ItemToFlash != ITEM_RADAR) { 
+		RwV3d pos;
+		float w, h;
+		if(CSprite::CalcScreenCoors(m_vecArrowPoint, &pos, &w, &h, false) && CHud::m_ItemToFlash != ITEM_RADAR) { 
 			float recipz = 1.0f / pos.z;
 			float angle = RADTODEG(CGeneral::GetATanOfXY((plr - target).x, (plr - target).y) + M_PI_2);
 
-			CSprite::RenderBufferedOneXLUSprite_Rotate_Dimension(pos.x, pos.y, pos.z, SCREEN_SCALE_X(20.0f * 0.5f), SCREEN_SCALE_Y(48.0f * 0.5f), 255, 255, 255, 255, recipz, angle, 255);
+			CSprite::RenderBufferedOneXLUSprite_Rotate_Dimension(pos.x, pos.y, pos.z, SCREEN_SCALE_X(24.0f * 0.4f), SCREEN_SCALE_Y(32.0f * 0.4f), 255, 255, 255, 255, recipz, angle, 255);
 		}
 
 		CSprite::FlushSpriteBuffer();

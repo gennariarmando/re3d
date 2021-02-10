@@ -98,7 +98,7 @@ class C3dMarkers
 public:
 	static float m_fBigArrowAlpha;
 	static bool m_fShow;
-	static CVector m_fArrowPoint;
+	static CVector m_vecArrowPoint;
 
 public:
 	static void Init();
