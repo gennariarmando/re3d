@@ -65,6 +65,7 @@ int16 CFont::Size[MAX_FONTS][193] = {
 		19, 19, 19, 19, 21, 19, 19, 19, 19, 19, 10, 19, 19, 19, 19, 19,
 		16, 19, 19, 10, 19, 19, 15, 29, 19, 19, 19, 19, 19, 19, 21, 19,
 		20, 32, 19, 19, 19, 19, 19, 19, 19, 29, 19, 19, 19, 19, 19, 10,
+		22
 	},
 
 	{
@@ -80,6 +81,7 @@ int16 CFont::Size[MAX_FONTS][193] = {
 		10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 10, 10, 10, 10, 10,
 		10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
 		10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+		22
 	},
 
 	{
@@ -396,11 +398,11 @@ CFont::DrawButton(float x, float y)
 void
 CFont::PrintChar(float x, float y, wchar c)
 {
-	if(x <= 0.0f || x > SCREEN_WIDTH ||
+	if (x <= 0.0f || x > SCREEN_WIDTH ||
 #ifdef FIX_BUGS
-	   y <= 0.0f || y > SCREEN_HEIGHT)
+		y <= 0.0f || y > SCREEN_HEIGHT)
 #else
-	   y <= 0.0f || y > SCREEN_WIDTH)
+		y <= 0.0f || y > SCREEN_WIDTH)
 #endif
 		return;
 
@@ -408,78 +410,69 @@ CFont::PrintChar(float x, float y, wchar c)
 	float xoff = c % 16;
 	float yoff = c / 16;
 #ifdef MORE_LANGUAGES
-	if(IsJapaneseFont()) {
+	if (IsJapaneseFont()) {
 		w = 21.0f;
 		xoff = (float)(c % 48);
 		yoff = c / 48;
 	}
 #endif
 
-	if(Details.style == FONT_BANK || Details.style == FONT_HEADING) {
-		if(Details.dropShadowPosition != 0) {
-			CSprite2d::AddSpriteToBank(
-#ifdef FIX_BUGS
-			    Details.bank + Details.style,
-#else
-			    Details.style, // BUG: game doesn't add bank
-#endif
-#ifdef FIX_BUGS
-			    CRect(x + SCREEN_SCALE_X(Details.dropShadowPosition), y + SCREEN_SCALE_Y(Details.dropShadowPosition),
-			          x + SCREEN_SCALE_X(Details.dropShadowPosition) + 32.0f * Details.scaleX * 1.0f,
-			          y + SCREEN_SCALE_Y(Details.dropShadowPosition) + 40.0f * Details.scaleY * 0.5f),
-#else
-			    CRect(x + Details.dropShadowPosition, y + Details.dropShadowPosition,
-			          x + Details.dropShadowPosition + 32.0f * Details.scaleX * 1.0f,
-			          y + Details.dropShadowPosition + 40.0f * Details.scaleY * 0.5f),
-#endif
-			    Details.dropColor, xoff / 16.0f, yoff / 12.8f, (xoff + 1.0f) / 16.0f - 0.001f, yoff / 12.8f, xoff / 16.0f, (yoff + 1.0f) / 12.8f,
-			    (xoff + 1.0f) / 16.0f - 0.001f, (yoff + 1.0f) / 12.8f - 0.0001f);
-		}
+	if (Details.dropShadowPosition != 0) {
 		CSprite2d::AddSpriteToBank(
 #ifdef FIX_BUGS
-		    Details.bank + Details.style,
+			Details.bank + Details.style,
 #else
-		    Details.style, // BUG: game doesn't add bank
-#endif
-		    CRect(x, y, x + 32.0f * Details.scaleX * 1.0f, y + 40.0f * Details.scaleY * 0.5f), Details.color, xoff / 16.0f, yoff / 12.8f,
-		    (xoff + 1.0f) / 16.0f - 0.001f, yoff / 12.8f, xoff / 16.0f, (yoff + 1.0f) / 12.8f - 0.002f, (xoff + 1.0f) / 16.0f - 0.001f,
-		    (yoff + 1.0f) / 12.8f - 0.002f);
-#ifdef MORE_LANGUAGES
-	} else if(IsJapaneseFont()) {
-		if(Details.dropShadowPosition != 0) {
-			CSprite2d::AddSpriteToBank(
-#ifdef FIX_BUGS
-			    Details.bank + Details.style,
-#else
-			    Details.style, // BUG: game doesn't add bank
+			Details.style, // BUG: game doesn't add bank
 #endif
 #ifdef FIX_BUGS
-			    CRect(x + SCREEN_SCALE_X(Details.dropShadowPosition), y + SCREEN_SCALE_Y(Details.dropShadowPosition),
-			          x + SCREEN_SCALE_X(Details.dropShadowPosition) + 32.0f * Details.scaleX * 1.0f,
-			          y + SCREEN_SCALE_Y(Details.dropShadowPosition) + 40.0f * Details.scaleY / 2.75f),
+			CRect(x + SCREEN_SCALE_X(Details.dropShadowPosition), y + SCREEN_SCALE_Y(Details.dropShadowPosition),
+				x + SCREEN_SCALE_X(Details.dropShadowPosition) + 32.0f * Details.scaleX * 1.0f,
+				y + SCREEN_SCALE_Y(Details.dropShadowPosition) + 40.0f * Details.scaleY * 0.5f),
 #else
-			    CRect(x + Details.dropShadowPosition, y + Details.dropShadowPosition,
-			          x + Details.dropShadowPosition + 32.0f * Details.scaleX * 1.0f,
-			          y + Details.dropShadowPosition + 40.0f * Details.scaleY / 2.75f),
+			CRect(x + Details.dropShadowPosition, y + Details.dropShadowPosition,
+				x + Details.dropShadowPosition + 32.0f * Details.scaleX * 1.0f,
+				y + Details.dropShadowPosition + 40.0f * Details.scaleY * 0.5f),
 #endif
-			    Details.dropColor, xoff * w / 1024.0f, yoff / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, yoff / 25.6f, xoff * w / 1024.0f,
-			    (yoff + 1.0f) / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, (yoff + 1.0f) / 25.6f - 0.0001f);
-		}
-		CSprite2d::AddSpriteToBank(Details.bank + Details.style, // BUG: game doesn't add bank
-		                           CRect(x, y, x + 32.0f * Details.scaleX * 1.0f, y + 40.0f * Details.scaleY / 2.75f), Details.color,
-		                           xoff * w / 1024.0f, yoff / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, yoff / 25.6f, xoff * w / 1024.0f,
-		                           (yoff + 1.0f) / 25.6f - 0.002f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, (yoff + 1.0f) / 25.6f - 0.0001f);
-#endif
-	} else {
-		CSprite2d::AddSpriteToBank(
-#ifdef FIX_BUGS
-		    Details.bank + Details.style,
-#else
-		    Details.style, // BUG: game doesn't add bank
-#endif
-		    CRect(x, y, x + 32.0f * Details.scaleX * w, y + 32.0f * Details.scaleY * 0.5f), Details.color, xoff / 16.0f, yoff / 16.0f,
-		    (xoff + w) / 16.0f, yoff / 16.0f, xoff / 16.0f, (yoff + 1.0f) / 16.0f, (xoff + w) / 16.0f - 0.0001f, (yoff + 1.0f) / 16.0f - 0.0001f);
+			Details.dropColor, xoff / 16.0f, yoff / 12.8f, (xoff + 1.0f) / 16.0f - 0.001f, yoff / 12.8f, xoff / 16.0f, (yoff + 1.0f) / 12.8f,
+			(xoff + 1.0f) / 16.0f - 0.001f, (yoff + 1.0f) / 12.8f - 0.0001f);
 	}
+	CSprite2d::AddSpriteToBank(
+#ifdef FIX_BUGS
+		Details.bank + Details.style,
+#else
+		Details.style, // BUG: game doesn't add bank
+#endif
+		CRect(x, y, x + 32.0f * Details.scaleX * 1.0f, y + 40.0f * Details.scaleY * 0.5f), Details.color, xoff / 16.0f, yoff / 12.8f,
+		(xoff + 1.0f) / 16.0f - 0.001f, yoff / 12.8f, xoff / 16.0f, (yoff + 1.0f) / 12.8f - 0.002f, (xoff + 1.0f) / 16.0f - 0.001f,
+		(yoff + 1.0f) / 12.8f - 0.002f);
+#ifdef MORE_LANGUAGES
+}
+ else if (IsJapaneseFont()) {
+ if (Details.dropShadowPosition != 0) {
+	 CSprite2d::AddSpriteToBank(
+#ifdef FIX_BUGS
+		 Details.bank + Details.style,
+#else
+		 Details.style, // BUG: game doesn't add bank
+#endif
+#ifdef FIX_BUGS
+		 CRect(x + SCREEN_SCALE_X(Details.dropShadowPosition), y + SCREEN_SCALE_Y(Details.dropShadowPosition),
+			 x + SCREEN_SCALE_X(Details.dropShadowPosition) + 32.0f * Details.scaleX * 1.0f,
+			 y + SCREEN_SCALE_Y(Details.dropShadowPosition) + 40.0f * Details.scaleY / 2.75f),
+#else
+		 CRect(x + Details.dropShadowPosition, y + Details.dropShadowPosition,
+			 x + Details.dropShadowPosition + 32.0f * Details.scaleX * 1.0f,
+			 y + Details.dropShadowPosition + 40.0f * Details.scaleY / 2.75f),
+#endif
+		 Details.dropColor, xoff * w / 1024.0f, yoff / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, yoff / 25.6f, xoff * w / 1024.0f,
+		 (yoff + 1.0f) / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, (yoff + 1.0f) / 25.6f - 0.0001f);
+ }
+ CSprite2d::AddSpriteToBank(Details.bank + Details.style, // BUG: game doesn't add bank
+	 CRect(x, y, x + 32.0f * Details.scaleX * 1.0f, y + 40.0f * Details.scaleY / 2.75f), Details.color,
+	 xoff * w / 1024.0f, yoff / 25.6f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, yoff / 25.6f, xoff * w / 1024.0f,
+	 (yoff + 1.0f) / 25.6f - 0.002f, xoff * w / 1024.0f + (1.0f / 48.0f) - 0.001f, (yoff + 1.0f) / 25.6f - 0.0001f);
+#endif
+
 }
 
 #ifdef MORE_LANGUAGES

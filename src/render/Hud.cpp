@@ -960,15 +960,16 @@ void CHud::Draw()
 			if(FindPlayerPed()->m_pWanted->m_nWantedLevel > 0) fWantedOffset = 16.0f;
 
 			if(CTimer::GetTimeInMilliseconds() % (1000 + 300) < 1000)
-				Sprites[HUD_PAGERON].Draw(CRect(SCREEN_SCALE_X(20.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(16.0f + fWantedOffset),
-				                                SCREEN_SCALE_X(126.0f) + SCREEN_SCALE_X(20.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
-				                                SCREEN_SCALE_Y(50.0f) + SCREEN_SCALE_Y(16.0f + fWantedOffset)),
+				Sprites[HUD_PAGERON].Draw(CRect(SCREEN_SCALE_X(22.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
+												SCREEN_SCALE_Y(16.0f + fWantedOffset),
+				                                SCREEN_SCALE_X(132.0f) + SCREEN_SCALE_X(22.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
+				                                SCREEN_SCALE_Y(54.0f) + SCREEN_SCALE_Y(16.0f + fWantedOffset)),
 				                          CRGBA(255, 255, 255, 255));
 			else
-				Sprites[HUD_PAGEROFF].Draw(CRect(SCREEN_SCALE_X(20.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
+				Sprites[HUD_PAGEROFF].Draw(CRect(SCREEN_SCALE_X(22.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
 				                                 SCREEN_SCALE_Y(16.0f + fWantedOffset),
-				                                 SCREEN_SCALE_X(126.0f) + SCREEN_SCALE_X(20.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
-				                                 SCREEN_SCALE_Y(50.0f) + SCREEN_SCALE_Y(16.0f + fWantedOffset)),
+				                                 SCREEN_SCALE_X(132.0f) + SCREEN_SCALE_X(22.0f) - SCREEN_SCALE_X_FIX(PagerXOffset),
+				                                 SCREEN_SCALE_Y(54.0f) + SCREEN_SCALE_Y(16.0f + fWantedOffset)),
 				                           CRGBA(255, 255, 255, 255));
 
 			CFont::SetBackgroundOff();
@@ -981,7 +982,7 @@ void CHud::Draw()
 			CFont::SetJustifyOff();
 			CFont::SetPropOff();
 			CFont::SetFontStyle(FONT_PAGER);
-			CFont::PrintString(SCREEN_SCALE_X(44.0f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(8.0f + 16.0f + fWantedOffset),
+			CFont::PrintString(SCREEN_SCALE_X(38.5f) - SCREEN_SCALE_X_FIX(PagerXOffset), SCREEN_SCALE_Y(10.0f + 16.0f + fWantedOffset),
 			                   m_PagerMessage);
 		}
 
