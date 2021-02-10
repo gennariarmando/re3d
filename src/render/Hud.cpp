@@ -174,6 +174,7 @@ struct
 	{"health", ""},
 	{"armour", ""},
 	{"jailfree", ""},
+	{"freecare", ""},
 	{"sitesniper", "sitesniperm"},
 	{"siteM16", "siteM16m"},
 	{"siterocket", "siterocket"},
@@ -551,7 +552,7 @@ void CHud::Draw()
 		   FindPlayerPed()->m_fHealth < 10 && CTimer::GetFrameCounter() & 8) {
 			if(FindPlayerPed()->m_fHealth >= 10 || FindPlayerPed()->m_fHealth < 10 && CTimer::GetFrameCounter() & 8) {
 
-				if(CWorld::Players[CWorld::PlayerInFocus].m_bGetOutOfHospitalFree
+				if(FindPlayerPed()->m_fHealth > 100.0f
 				       ? 1
 				       : (!CWorld::Players[CWorld::PlayerInFocus].m_nTimeLastHealthLoss) ||
 				             (CTimer::GetTimeInMilliseconds() > CWorld::Players[CWorld::PlayerInFocus].m_nTimeLastHealthLoss + 2000) ||
@@ -595,7 +596,15 @@ void CHud::Draw()
 		}
 
 		/*
-		                GetOutOfJailFree
+				GetOutOfHospitalFree
+		*/
+
+		if (CWorld::Players[CWorld::PlayerInFocus].m_bGetOutOfHospitalFree)
+			Sprites[HUD_FREECARE].Draw(SCREEN_SCALE_X(136.0f), SCREEN_SCALE_FROM_BOTTOM(76.0f), SCREEN_SCALE_X(22.0f), SCREEN_SCALE_Y(20.0f),
+				CRGBA(255, 255, 255, 255));
+
+		/*
+				GetOutOfJailFree
 		*/
 
 		if(CWorld::Players[CWorld::PlayerInFocus].m_bGetOutOfJailFree)
@@ -603,10 +612,10 @@ void CHud::Draw()
 			                           CRGBA(255, 255, 255, 255));
 
 		/*
-		                DrawHealthIcon
+				BonusHealth25%
 		*/
 
-		if(CWorld::Players[CWorld::PlayerInFocus].m_bGetOutOfHospitalFree) {
+		if(FindPlayerPed()->m_fHealth >= 101.0f) {
 			if(!CWorld::Players[CWorld::PlayerInFocus].m_nTimeLastHealthLoss ||
 			   CTimer::GetTimeInMilliseconds() > CWorld::Players[CWorld::PlayerInFocus].m_nTimeLastHealthLoss + 2000 ||
 			   CTimer::GetFrameCounter() & 4) {

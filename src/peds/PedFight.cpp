@@ -2406,9 +2406,6 @@ CPed::InflictDamage(CEntity *damagedBy, eWeaponType method, float damage, ePedPi
 	if (m_fHealth - healthImpact >= 1.0f && !willLinger) {
 		m_fHealth -= healthImpact;
 
-		if(CWorld::Players[CWorld::PlayerInFocus].m_pPed == this && m_fHealth <= 100.0f)
-			CWorld::Players[CWorld::PlayerInFocus].m_bGetOutOfHospitalFree = false;
-
 		return false;
 	}
 
