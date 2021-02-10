@@ -48,13 +48,13 @@ cBuoyancy::PreCalcSetup(CPhysical *phys, float buoyancy)
 	m_dimMax = colModel->boundingBox.max;
 
 	if(m_isBoat){
-		if(phys->GetModelIndex() == MI_PREDATOR){
+		if(phys->GetModelIndex() == MI_POLBOAT){
 			m_dimMax.y *= 0.9f;
 			m_dimMin.y *= 0.9f;
-		}else if(phys->GetModelIndex() == MI_SPEEDER){
+		}else if(phys->GetModelIndex() == MI_SPEEDBOAT){
 			m_dimMax.y *= 1.1f;
 			m_dimMin.y *= 0.9f;
-		}else if(phys->GetModelIndex() == MI_REEFER){
+		}else if(phys->GetModelIndex() == MI_FISHBOAT){
 			m_dimMin.y *= 0.9f;
 		}else{
 			m_dimMax.y *= 0.9f;

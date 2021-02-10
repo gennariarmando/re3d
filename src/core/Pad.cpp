@@ -108,16 +108,16 @@ void HealthCheat()
 void TankCheat()
 {
 	CHud::SetHelpMessage(TheText.Get("CHEAT1"), true);
-	CStreaming::RequestModel(MI_RHINO, 0);
+	CStreaming::RequestModel(MI_TANK, 0);
 	CStreaming::LoadAllRequestedModels(false);
-	if (CStreaming::ms_aInfoForModel[MI_RHINO].m_loadState == STREAMSTATE_LOADED) {
+	if (CStreaming::ms_aInfoForModel[MI_TANK].m_loadState == STREAMSTATE_LOADED) {
 		CHud::SetHelpMessage(TheText.Get("CHEAT1"), true);
 		int32 node = ThePaths.FindNodeClosestToCoors(FindPlayerCoors(), PATH_CAR, 100.0f);
 
 		if (node < 0) return;
 
 #ifdef FIX_BUGS
-		CAutomobile* tank = new CAutomobile(MI_RHINO, RANDOM_VEHICLE);
+		CAutomobile* tank = new CAutomobile(MI_TANK, RANDOM_VEHICLE);
 #else
 		CAutomobile *tank = new CAutomobile(MI_RHINO, MISSION_VEHICLE);
 #endif

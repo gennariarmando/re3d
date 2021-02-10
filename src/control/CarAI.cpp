@@ -105,7 +105,7 @@ void CCarAI::UpdateCarAI(CVehicle* pVehicle)
 				if (!FindPlayerVehicle() || FindPlayerVehicle()->IsUpsideDown() ||
 					FindPlayerVehicle()->GetMoveSpeed().Magnitude() < 0.05f && pVehicle->m_nTimeBlocked > TIME_COPS_WAIT_TO_EXIT_AFTER_STOPPING) {
 					if (pVehicle->bIsLawEnforcer &&
-						(pVehicle->GetModelIndex() != MI_RHINO || pVehicle->m_randomSeed > 10000) &&
+						(pVehicle->GetModelIndex() != MI_TANK || pVehicle->m_randomSeed > 10000) &&
 						(FindPlayerCoors() - pVehicle->GetPosition()).Magnitude2D() < 10.0f) {
 						TellOccupantsToLeaveCar(pVehicle);
 						pVehicle->AutoPilot.m_nCruiseSpeed = 0;
@@ -164,7 +164,7 @@ void CCarAI::UpdateCarAI(CVehicle* pVehicle)
 				if (!FindPlayerVehicle() || FindPlayerVehicle()->IsUpsideDown() ||
 					FindPlayerVehicle()->GetMoveSpeed().Magnitude() < 0.05f && pVehicle->m_nTimeBlocked > TIME_COPS_WAIT_TO_EXIT_AFTER_STOPPING) {
 					if (pVehicle->bIsLawEnforcer &&
-						(pVehicle->GetModelIndex() != MI_RHINO || pVehicle->m_randomSeed > 10000) &&
+						(pVehicle->GetModelIndex() != MI_TANK || pVehicle->m_randomSeed > 10000) &&
 						(FindPlayerCoors() - pVehicle->GetPosition()).Magnitude2D() < 10.0f) {
 						TellOccupantsToLeaveCar(pVehicle);
 						pVehicle->AutoPilot.m_nCruiseSpeed = 0;
@@ -477,14 +477,14 @@ void CCarAI::AddPoliceCarOccupants(CVehicle* pVehicle)
 	pVehicle->bOccupantsHaveBeenGenerated = true;
 	switch (pVehicle->GetModelIndex()){
 	case MI_FBICAR:
-	case MI_ENFORCER:
+	case MI_SWATVAN:
 		pVehicle->SetUpDriver();
 		for (int i = 0; i < 3; i++)
 			pVehicle->SetupPassenger(i);
 		return;
 	case MI_POLICE:
-	case MI_RHINO:
-	case MI_BARRACKS:
+	case MI_TANK:
+	case MI_ARMYTRUCK:
 	case MI_HUMVEE2:
 		pVehicle->SetUpDriver();
 		if (FindPlayerPed()->m_pWanted->GetWantedLevel() > 1)

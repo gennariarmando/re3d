@@ -1679,7 +1679,7 @@ CShadows::RenderExtraPlayerShadows(void)
 		}
 		else
 		{
-			if ( pCar->GetModelIndex() != MI_RCBANDIT )
+			if ( pCar->GetModelIndex() != MI_RCBUG )
 			{
 				for ( int32 i = 0; i < CPointLights::NumLights; i++ )
 				{

@@ -484,7 +484,7 @@ CPhysical::ApplySpringDampening(float damping, CVector &springDir, CVector &poin
 	float impulse = -damping * (speedA + speedB)/2.0f * m_fMass * step * 0.53f;
 
 	// what is this?
-	if(GetModelIndex() != MI_YANKEE) {
+	if(GetModelIndex() != MI_TANKER) {
 		float a = m_fTurnMass / ((point.MagnitudeSqr() + 1.0f) * 2.0f * m_fMass);
 		a = Min(a, 1.0f);
 		float b = Abs(impulse / (speedB * m_fMass));
@@ -557,7 +557,7 @@ CPhysical::ApplyCollision(CPhysical *B, CColPoint &colpoint, float &impulseA, fl
 	}else
 		massFactorB = B->bIsHeavy ? 2.0f : 1.0f;
 
-	if(B->GetModelIndex() == MI_YANKEE) massFactorB = 2.0f;
+	if(B->GetModelIndex() == MI_TANKER) massFactorB = 2.0f;
 
 
 	float speedA, speedB;
@@ -1178,8 +1178,8 @@ CPhysical::ProcessShiftSectorList(CPtrList *lists)
 				skipShift = true;
 			else if(A->IsPed() && ((CPed*)A)->m_pCollidingEntity == B ||
 			  B->IsPed() && ((CPed*)B)->m_pCollidingEntity == A ||
-			  A->GetModelIndex() == MI_RCBANDIT && B->IsVehicle() ||
-			  B->GetModelIndex() == MI_RCBANDIT && (A->IsPed() || A->IsVehicle()))
+			  A->GetModelIndex() == MI_RCBUG && B->IsVehicle() ||
+			  B->GetModelIndex() == MI_RCBUG && (A->IsPed() || A->IsVehicle()))
 				skipShift = true;
 
 			if(skipShift)
@@ -1523,8 +1523,8 @@ CPhysical::ProcessCollisionSectorList(CPtrList *lists)
 			}else if(B->IsPed() && Bped->m_pCollidingEntity == A){
 				skipCollision = true;
 				A->bSkipLineCol = true;
-			}else if(A->GetModelIndex() == MI_RCBANDIT && (B->IsPed() || B->IsVehicle()) ||
-			         B->GetModelIndex() == MI_RCBANDIT && (A->IsPed() || A->IsVehicle())){
+			}else if(A->GetModelIndex() == MI_RCBUG && (B->IsPed() || B->IsVehicle()) ||
+			         B->GetModelIndex() == MI_RCBUG && (A->IsPed() || A->IsVehicle())){
 				skipCollision = true;
 				A->bSkipLineCol = true;
 			}else if(A->IsPed() && B->IsObject() && Bobj->m_fUprootLimit > 0.0f)
@@ -1590,7 +1590,7 @@ CPhysical::ProcessCollisionSectorList(CPtrList *lists)
 
 						float adhesion = CSurfaceTable::GetAdhesiveLimit(aColPoints[i]) / numCollisions;
 
-						if(A->GetModelIndex() == MI_RCBANDIT)
+						if(A->GetModelIndex() == MI_RCBUG)
 							adhesion *= 0.2f;
 						else if(IsBoatModel(A->GetModelIndex())){
 							if(aColPoints[i].normal.z > 0.6f){

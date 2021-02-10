@@ -17,7 +17,7 @@ void CGangs::Initialise(void)
 {
 	Gang[GANG_MAFIA].m_nVehicleMI = MI_FIAT;
 	Gang[GANG_TRIAD].m_nVehicleMI = MI_MAFIA;
-	Gang[GANG_DIABLOS].m_nVehicleMI = MI_DIABLOS;
+	Gang[GANG_DIABLOS].m_nVehicleMI = MI_IMPALA;
 	Gang[GANG_YAKUZA].m_nVehicleMI = MI_YAKUZA;
 	Gang[GANG_YARDIE].m_nVehicleMI = MI_YARDIE;
 	Gang[GANG_COLUMB].m_nVehicleMI = MI_COLUMB;

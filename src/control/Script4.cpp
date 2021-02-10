@@ -1126,7 +1126,7 @@ int8 CRunningScript::ProcessCommands800To899(int32 command)
 		// Adding this check to correspond to command name.
 		// All original game scripts always assume that the vehicle is actually Mr. Whoopee,
 		// but maybe there are mods that use it as "is alarm activated"?
-		script_assert(pVehicle->GetModelIndex() == MI_MRWHOOP);
+		script_assert(pVehicle->GetModelIndex() == MI_ICECREAM);
 		UpdateCompareFlag(pVehicle->m_bSirenOrAlarm);
 		return 0;
 	}
@@ -1734,70 +1734,70 @@ int8 CRunningScript::ProcessCommands900To999(int32 command)
 			CVehicleModelInfo* pVehicleInfo = (CVehicleModelInfo*)pInfo;
 			if (pVehicleInfo->m_vehicleType == VEHICLE_TYPE_CAR) {
 				switch (model) {
-				case MI_LANDSTAL:
-				case MI_LINERUN:
+				case MI_SUV:
+				case MI_FREIGHT:
 				case MI_FIRETRUCK:
-				case MI_TRASH:
-				case MI_STRETCH:
-				case MI_MULE:
+				case MI_GARBAGE:
+				case MI_LIMO:
+				case MI_LUTON:
 				case MI_AMBULAN:
 				case MI_FBICAR:
-				case MI_MRWHOOP:
-				case MI_BFINJECT:
+				case MI_ICECREAM:
+				case MI_BUGGY:
 				case MI_CORPSE:
 				case MI_POLICE:
-				case MI_ENFORCER:
-				case MI_SECURICA:
-				case MI_PREDATOR:
+				case MI_SWATVAN:
+				case MI_ARMOURTRUCK:
+				case MI_POLBOAT:
 				case MI_BUS:
-				case MI_RHINO:
-				case MI_BARRACKS:
+				case MI_TANK:
+				case MI_ARMYTRUCK:
 				case MI_TRAIN:
 				case MI_CHOPPER:
 				case MI_DODO:
 				case MI_COACH:
-				case MI_RCBANDIT:
+				case MI_RCBUG:
 				case MI_MAFIA:
 				case MI_FIAT:
 				case MI_YARDIE:
 				case MI_YAKUZA:
-				case MI_DIABLOS:
+				case MI_IMPALA:
 				case MI_COLUMB:
 				case MI_HOODS:
-				case MI_AIRTRAIN:
+				case MI_AEROPLANE:
 				case MI_DEADDODO:
-				case MI_SPEEDER:
-				case MI_REEFER:
+				case MI_SPEEDBOAT:
+				case MI_FISHBOAT:
 				case MI_PANLANT:
 				case MI_FLATBED:
-				case MI_YANKEE:
+				case MI_TANKER:
 				case MI_ESCAPE:
-				case MI_BORGNINE:
-				case MI_TOYZ:
+				case MI_CRUISER:
+				case MI_LUTON2:
 				case MI_GHOST:
 				case MI_MIAMI_RCBARON:
 				case MI_MIAMI_RCRAIDER:
 					model = -1;
 					break;
-				case MI_IDAHO:
-				case MI_STINGER:
-				case MI_PEREN:
-				case MI_SENTINEL:
-				case MI_PATRIOT:
-				case MI_MANANA:
-				case MI_INFERNUS:
-				case MI_BLISTA:
-				case MI_PONY:
-				case MI_CHEETAH:
-				case MI_MOONBEAM:
-				case MI_ESPERANT:
+				case MI_RIVIERA:
+				case MI_BOXSTA:
+				case MI_NOVA:
+				case MI_BEAMER:
+				case MI_HUMVEE:
+				case MI_RELIANT:
+				case MI_LAMBO:
+				case MI_CARRIER:
+				case MI_TRANSIT:
+				case MI_TESTEROS:
+				case MI_ASTROVAN:
+				case MI_ELDORADO:
 				case MI_TAXI:
-				case MI_KURUMA:
-				case MI_BOBCAT:
-				case MI_BANSHEE:
+				case MI_INTREPID:
+				case MI_PICKUPTRUCK:
+				case MI_VIPER:
 				case MI_CABBIE:
-				case MI_STALLION:
-				case MI_RUMPO:
+				case MI_MUSTANG:
+				case MI_RAMVAN:
 				case 151:
 				case 152:
 				case 153:

@@ -694,7 +694,7 @@ CRenderer::SetupEntityVisibility(CEntity *ent)
 			   TheCamera.Cams[TheCamera.ActiveCam].Mode == CCam::MODE_1STPERSON){
 				// Player's vehicle in first person mode
 				if(TheCamera.Cams[TheCamera.ActiveCam].DirectionWasLooking == LOOKING_FORWARD ||
-				   ent->GetModelIndex() == MI_RHINO ||
+				   ent->GetModelIndex() == MI_TANK ||
 				   ent->GetModelIndex() == MI_COACH ||
 				   TheCamera.m_bInATunnelAndABigVehicle){
 					ent->bNoBrightHeadLights = true;

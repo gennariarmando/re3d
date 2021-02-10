@@ -127,7 +127,7 @@ CPlane::ProcessControl(void)
 	// Explosion
 	if(m_bHasBeenHit){
 		// BUG: since this is all based on frames, you can skip the explosion processing when you go into the menu
-		if(GetModelIndex() == MI_AIRTRAIN){
+		if(GetModelIndex() == MI_AEROPLANE){
 			int frm = CTimer::GetFrameCounter() - m_nFrameWhenHit;
 			if(frm == 20){
 				static int nFrameGen;
@@ -247,8 +247,8 @@ CPlane::ProcessControl(void)
 	}
 
 	// Update plane position and speed
-	if(GetModelIndex() == MI_AIRTRAIN || !m_isFarAway || ((CTimer::GetFrameCounter() + m_randomSeed) & 7) == 0){
-		if(GetModelIndex() == MI_AIRTRAIN){
+	if(GetModelIndex() == MI_AEROPLANE || !m_isFarAway || ((CTimer::GetFrameCounter() + m_randomSeed) & 7) == 0){
+		if(GetModelIndex() == MI_AEROPLANE){
 			float pathPositionRear = PlanePathPosition[m_nPlaneId] - 30.0f;
 			if(pathPositionRear < 0.0f)
 				pathPositionRear += TotalLengthOfFlightPath;
@@ -756,11 +756,11 @@ CPlane::InitPlanes(void)
 	}
 
 	CStreaming::LoadAllRequestedModels(false);
-	CStreaming::RequestModel(MI_AIRTRAIN, 0);
+	CStreaming::RequestModel(MI_AEROPLANE, 0);
 	CStreaming::LoadAllRequestedModels(false);
 
 	for(i = 0; i < 3; i++){
-		CPlane *plane = new CPlane(MI_AIRTRAIN, PERMANENT_VEHICLE);
+		CPlane *plane = new CPlane(MI_AEROPLANE, PERMANENT_VEHICLE);
 		plane->GetMatrix().SetTranslate(0.0f, 0.0f, 0.0f);
 		plane->SetStatus(STATUS_ABANDONED);
 		plane->bIsLocked = true;
@@ -910,7 +910,7 @@ CPlane::TestRocketCollision(CVector *rocketPos)
 #ifdef EXPLODING_AIRTRAIN
 		   (plane->GetModelIndex() == MI_AIRTRAIN || plane->GetModelIndex() == MI_DEADDODO) &&
 #else
-		   plane->GetModelIndex() != MI_AIRTRAIN && plane->GetModelIndex() == MI_DEADDODO &&	// strange check
+		   plane->GetModelIndex() != MI_AEROPLANE && plane->GetModelIndex() == MI_DEADDODO &&	// strange check
 #endif
 		   !plane->m_bHasBeenHit && (*rocketPos - plane->GetPosition()).Magnitude() < 25.0f){
 			plane->m_nFrameWhenHit = CTimer::GetFrameCounter();

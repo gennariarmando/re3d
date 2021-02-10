@@ -541,7 +541,7 @@ CVehicleModelInfo::SetVehicleComponentFlags(RwFrame *frame, uint32 flags)
 #define SETFLAGS(f) RwFrameForAllObjects(frame, SetAtomicFlagCB, (void*)(f))
 
 	if(flags & VEHICLE_FLAG_WINDSCREEN){
-		if(this == CModelInfo::GetModelInfo(MI_RHINO))
+		if(this == CModelInfo::GetModelInfo(MI_TANK))
 			return;
 		SETFLAGS(ATOMIC_FLAG_WINDSCREEN);
 	}
@@ -1112,7 +1112,7 @@ CVehicleModelInfo::GetMaximumNumberOfPassengersFromNumberOfDoors(int id)
 	}
 
 	if(n == 0)
-		return id == MI_RCBANDIT ? 0 : 1;
+		return id == MI_RCBUG ? 0 : 1;
 
 	if(id == MI_COACH)
 		return 8;

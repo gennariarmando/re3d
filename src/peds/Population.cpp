@@ -772,19 +772,19 @@ CPopulation::AddPedInCar(CVehicle* car)
 			preferredModel = COP_STREET;
 			pedType = PEDTYPE_COP;
 			break;
-		case MI_ENFORCER:
+		case MI_SWATVAN:
 			preferredModel = COP_SWAT;
 			pedType = PEDTYPE_COP;
 			break;
-		case MI_RHINO:
-		case MI_BARRACKS:
+		case MI_TANK:
+		case MI_ARMYTRUCK:
 	    case MI_HUMVEE2:
 			preferredModel = COP_ARMY;
 			pedType = PEDTYPE_COP;
 			break;
 		case MI_TAXI:
 		case MI_CABBIE:
-		case MI_BORGNINE:
+		case MI_CRUISER:
 			if (CGeneral::GetRandomTrueFalse()) {
 				pedType = PEDTYPE_CIVMALE;
 				preferredModel = MI_TAXI_D;

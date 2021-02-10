@@ -383,66 +383,66 @@ cAudioManager::ProcessPhysical(int32 id)
 
 #pragma region VEHICLE AUDIO
 enum eVehicleModel {
-	LANDSTAL,
-	IDAHO,
-	STINGER,
-	LINERUN,
-	PEREN,
-	SENTINEL,
-	PATRIOT,
+	SUV,
+	RIVIERA,
+	BOXSTA,
+	FREIGHT,
+	NOVA,
+	BEAMER,
+	HUMVEE,
 	FIRETRUK,
-	TRASH,
-	STRETCH,
-	MANANA,
-	INFERNUS,
-	BLISTA,
-	PONY,
-	MULE,
-	CHEETAH,
+	GARBAGE,
+	LIMO,
+	RELIANT,
+	LAMBO,
+	CARRIER,
+	TRANSIT,
+	LUTON,
+	TESTEROS,
 	AMBULAN,
 	FBICAR,
-	MOONBEAM,
-	ESPERANT,
+	ASTROVAN,
+	ELDORADO,
 	TAXI,
-	KURUMA,
-	BOBCAT,
-	MRWHOOP,
-	BFINJECT,
+	INTREPID,
+	PICKUPTRUCK,
+	ICECREAM,
+	BUGGY,
 	CORPSE,
 	POLICE,
-	ENFORCER,
-	SECURICA,
-	BANSHEE,
-	PREDATOR,
+	SWATVAN,
+	ARMOURTRUCK,
+	VIPER,
+	POLBOAT,
 	BUS,
-	RHINO,
-	BARRACKS,
+	TANK,
+	ARMYTRUCK,
 	TRAIN,
 	CHOPPER,
 	DODO,
 	COACH,
 	CABBIE,
-	STALLION,
-	RUMPO,
-	RCBANDIT,
-	BELLYUP,
-	MRWONGS,
+	MUSTANG,
+	RAMVAN,
+	RCBUG,
 	MAFIA,
+	HUMVEE2,
+	FIAT,
 	YARDIE,
 	YAKUZA,
-	DIABLOS,
+	IMPALA,
 	COLUMB,
 	HOODS,
-	AIRTRAIN,
+	AEROPLANE,
 	DEADDODO,
-	SPEEDER,
-	REEFER,
+	SPEEDDODO,
+	FISHBOAT,
 	PANLANT,
 	FLATBED,
-	YANKEE,
+	TANKER,
 	ESCAPE,
-	BORGNINE,
-	TOYZ,
+	CRUISER,
+	LUTON2,
 	GHOST,
 	CAR151,
 	CAR152,
@@ -596,7 +596,7 @@ cAudioManager::ProcessVehicle(CVehicle *veh)
 	switch (params.m_pVehicle->m_vehType) {
 	case VEHICLE_TYPE_CAR:
 		UpdateGasPedalAudio((CAutomobile *)veh);
-		if (params.m_nIndex == RCBANDIT) {
+		if (params.m_nIndex == RCBUG) {
 			ProcessModelCarEngine(params);
 			ProcessVehicleOneShots(params);
 			((CAutomobile *)veh)->m_fVelocityChangeForAudio = params.m_fVelocityChange;
@@ -1553,7 +1553,7 @@ cAudioManager::ProcessVehicleHorn(cVehicleParams& params)
 
 	if (params.m_fDistance < SQR(SOUND_INTENSITY)) {
 		automobile = (CAutomobile *)params.m_pVehicle;
-		if ((!automobile->m_bSirenOrAlarm || !UsesSirenSwitching(params.m_nIndex)) && automobile->GetModelIndex() != MI_MRWHOOP) {
+		if ((!automobile->m_bSirenOrAlarm || !UsesSirenSwitching(params.m_nIndex)) && automobile->GetModelIndex() != MI_ICECREAM) {
 			if (automobile->m_nCarHornTimer) {
 				if (params.m_pVehicle->GetStatus() != STATUS_PLAYER) {
 					automobile->m_nCarHornTimer = Min(44, automobile->m_nCarHornTimer);
@@ -1597,8 +1597,8 @@ cAudioManager::UsesSiren(int32 model) const
 	case AMBULAN:
 	case FBICAR:
 	case POLICE:
-	case ENFORCER:
-	case PREDATOR:
+	case SWATVAN:
+	case POLBOAT:
 		return true;
 	default:
 		return false;
@@ -1611,8 +1611,8 @@ cAudioManager::UsesSirenSwitching(int32 model) const
 	switch (model) {
 	case AMBULAN:
 	case POLICE:
-	case ENFORCER:
-	case PREDATOR:
+	case SWATVAN:
+	case POLBOAT:
 		return true;
 	default:
 		return false;
@@ -1675,7 +1675,7 @@ cAudioManager::ProcessVehicleSirenOrAlarm(cVehicleParams& params)
 bool
 cAudioManager::UsesReverseWarning(int32 model) const
 {
-	return model == LINERUN || model == FIRETRUK || model == TRASH || model == BUS || model == COACH;
+	return model == FREIGHT || model == FIRETRUK || model == GARBAGE || model == BUS || model == COACH;
 }
 
 bool
@@ -1807,7 +1807,7 @@ cAudioManager::ProcessAirBrakes(cVehicleParams& params)
 bool
 cAudioManager::HasAirBrakes(int32 model) const
 {
-	return model == LINERUN || model == FIRETRUK || model == TRASH || model == BUS || model == COACH;
+	return model == FREIGHT || model == FIRETRUK || model == GARBAGE || model == BUS || model == COACH;
 }
 
 bool
@@ -2014,7 +2014,7 @@ cAudioManager::ProcessVehicleOneShots(cVehicleParams& params)
 				iWheelIndex = 82;
 			m_sQueueSample.m_nFrequency = SampleManager.GetSampleBaseFrequency(SFX_TYRE_BUMP);
 			m_sQueueSample.m_nFrequency += RandomDisplacement(m_sQueueSample.m_nFrequency / 16);
-			if (params.m_nIndex == RCBANDIT) {
+			if (params.m_nIndex == RCBUG) {
 				m_sQueueSample.m_nFrequency *= 2;
 				emittingVol /= 2;
 			}
@@ -2410,7 +2410,7 @@ cAudioManager::ProcessBoatEngine(cVehicleParams& params)
 
 	if (params.m_fDistance < SQR(intensity)) {
 		boat = (CBoat *)params.m_pVehicle;
-		if (params.m_nIndex == REEFER) {
+		if (params.m_nIndex == FISHBOAT) {
 			CalculateDistance(params.m_bDistanceCalculated, params.m_fDistance);
 			m_sQueueSample.m_nVolume = ComputeVolume(80, intensity, m_sQueueSample.m_fDistance);
 			if (m_sQueueSample.m_nVolume != 0) {
@@ -2636,7 +2636,7 @@ void
 cAudioManager::ProcessPlane(cVehicleParams& params)
 {
 	switch (params.m_nIndex) {
-	case AIRTRAIN:
+	case AEROPLANE:
 		ProcessJumbo(params);
 		break;
 	case DEADDODO:

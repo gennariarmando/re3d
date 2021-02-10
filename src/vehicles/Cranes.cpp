@@ -445,24 +445,24 @@ bool CCrane::DoesCranePickUpThisCarType(uint32 mi)
 {
 	if (m_bIsCrusher) {
 		return mi != MI_FIRETRUCK &&
-			mi != MI_TRASH &&
+			mi != MI_GARBAGE &&
 #ifdef FIX_BUGS
 			mi != MI_COACH &&
 #else
 			mi != MI_BLISTA &&
 #endif
-			mi != MI_SECURICA &&
+			mi != MI_ARMOURTRUCK &&
 			mi != MI_BUS &&
 			mi != MI_DODO &&
-			mi != MI_RHINO;
+			mi != MI_TANK;
 	}
 	if (m_bIsMilitaryCrane) {
 		return mi == MI_FIRETRUCK ||
 			mi == MI_AMBULAN ||
-			mi == MI_ENFORCER ||
+			mi == MI_SWATVAN ||
 			mi == MI_FBICAR ||
-			mi == MI_RHINO ||
-			mi == MI_BARRACKS ||
+			mi == MI_TANK ||
+			mi == MI_ARMYTRUCK ||
 			mi == MI_POLICE;
 	}
 	return true;
@@ -473,10 +473,10 @@ bool CCranes::DoesMilitaryCraneHaveThisOneAlready(uint32 mi)
 	switch (mi) {
 	case MI_FIRETRUCK: return (CarsCollectedMilitaryCrane & 1);
 	case MI_AMBULAN: return (CarsCollectedMilitaryCrane & 2);
-	case MI_ENFORCER: return (CarsCollectedMilitaryCrane & 4);
+	case MI_SWATVAN: return (CarsCollectedMilitaryCrane & 4);
 	case MI_FBICAR: return (CarsCollectedMilitaryCrane & 8);
-	case MI_RHINO: return (CarsCollectedMilitaryCrane & 0x10);
-	case MI_BARRACKS: return (CarsCollectedMilitaryCrane & 0x20);
+	case MI_TANK: return (CarsCollectedMilitaryCrane & 0x10);
+	case MI_ARMYTRUCK: return (CarsCollectedMilitaryCrane & 0x20);
 	case MI_POLICE: return (CarsCollectedMilitaryCrane & 0x40);
 	default: break;
 	}
@@ -488,10 +488,10 @@ void CCranes::RegisterCarForMilitaryCrane(uint32 mi)
 	switch (mi) {
 	case MI_FIRETRUCK: CarsCollectedMilitaryCrane |= 1; break;
 	case MI_AMBULAN: CarsCollectedMilitaryCrane |= 2; break;
-	case MI_ENFORCER: CarsCollectedMilitaryCrane |= 4; break;
+	case MI_SWATVAN: CarsCollectedMilitaryCrane |= 4; break;
 	case MI_FBICAR: CarsCollectedMilitaryCrane |= 8; break;
-	case MI_RHINO: CarsCollectedMilitaryCrane |= 0x10; break;
-	case MI_BARRACKS: CarsCollectedMilitaryCrane |= 0x20; break;
+	case MI_TANK: CarsCollectedMilitaryCrane |= 0x10; break;
+	case MI_ARMYTRUCK: CarsCollectedMilitaryCrane |= 0x20; break;
 	case MI_POLICE: CarsCollectedMilitaryCrane |= 0x40; break;
 	default: break;
 	}

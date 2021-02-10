@@ -1423,11 +1423,11 @@ CStreaming::StreamVehiclesAndPeds(void)
 		return;
 
 	if(FindPlayerPed()->m_pWanted->AreSwatRequired()){
-		RequestModel(MI_ENFORCER, STREAMFLAGS_DONT_REMOVE);
+		RequestModel(MI_SWATVAN, STREAMFLAGS_DONT_REMOVE);
 		RequestModel(MI_SWAT, STREAMFLAGS_DONT_REMOVE);
 	}else{
-		SetModelIsDeletable(MI_ENFORCER);
-		if(!HasModelLoaded(MI_ENFORCER))
+		SetModelIsDeletable(MI_SWATVAN);
+		if(!HasModelLoaded(MI_SWATVAN))
 			SetModelIsDeletable(MI_SWAT);
 	}
 
@@ -1441,13 +1441,13 @@ CStreaming::StreamVehiclesAndPeds(void)
 	}
 
 	if(FindPlayerPed()->m_pWanted->AreArmyRequired()){
-		RequestModel(MI_RHINO, STREAMFLAGS_DONT_REMOVE);
-		RequestModel(MI_BARRACKS, STREAMFLAGS_DONT_REMOVE);
+		RequestModel(MI_TANK, STREAMFLAGS_DONT_REMOVE);
+		RequestModel(MI_ARMYTRUCK, STREAMFLAGS_DONT_REMOVE);
 		RequestModel(MI_ARMY, STREAMFLAGS_DONT_REMOVE);
 	}else{
-		SetModelIsDeletable(MI_RHINO);
-		SetModelIsDeletable(MI_BARRACKS);
-		if(!HasModelLoaded(MI_RHINO) && !HasModelLoaded(MI_BARRACKS))
+		SetModelIsDeletable(MI_TANK);
+		SetModelIsDeletable(MI_ARMYTRUCK);
+		if(!HasModelLoaded(MI_TANK) && !HasModelLoaded(MI_ARMYTRUCK))
 			SetModelIsDeletable(MI_ARMY);
 	}
 

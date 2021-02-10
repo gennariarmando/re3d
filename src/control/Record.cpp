@@ -490,18 +490,18 @@ void CRecordDataForChase::CleanUpChaseScene(void)
 void CRecordDataForChase::SetUpCarsForChaseScene(void)
 {
 	GiveUsACar(MI_POLICE, CVector(273.54221f, -1167.1907f, 24.880601f), 63.0f, &pChaseCars[0], 2, 1);
-	GiveUsACar(MI_ENFORCER, CVector(231.1783f, -1388.8322f, 25.978201f), 90.0f, &pChaseCars[1], 2, 1);
+	GiveUsACar(MI_SWATVAN, CVector(231.1783f, -1388.8322f, 25.978201f), 90.0f, &pChaseCars[1], 2, 1);
 	GiveUsACar(MI_TAXI, CVector(184.3156f, -1473.251f, 25.978201f), 0.0f, &pChaseCars[4], 6, 6);
-	GiveUsACar(MI_CHEETAH, CVector(173.8868f, -1377.6514f, 25.978201f), 0.0f, &pChaseCars[6], 4, 5);
-	GiveUsACar(MI_STINGER, CVector(102.5946f, -943.93628f, 25.9781f), 270.0f, &pChaseCars[7], 53, 53);
-	GiveUsACar(MI_CHEETAH, CVector(-177.7157f, -862.18652f, 25.978201f), 155.0f, &pChaseCars[10], 41, 1);
-	GiveUsACar(MI_STINGER, CVector(-170.56979f, -889.02362f, 25.978201f), 154.0f, &pChaseCars[11], 10, 10);
-	GiveUsACar(MI_KURUMA, CVector(402.60809f, -917.49628f, 37.381001f), 90.0f, &pChaseCars[14], 34, 1);
+	GiveUsACar(MI_TESTEROS, CVector(173.8868f, -1377.6514f, 25.978201f), 0.0f, &pChaseCars[6], 4, 5);
+	GiveUsACar(MI_BOXSTA, CVector(102.5946f, -943.93628f, 25.9781f), 270.0f, &pChaseCars[7], 53, 53);
+	GiveUsACar(MI_TESTEROS, CVector(-177.7157f, -862.18652f, 25.978201f), 155.0f, &pChaseCars[10], 41, 1);
+	GiveUsACar(MI_BOXSTA, CVector(-170.56979f, -889.02362f, 25.978201f), 154.0f, &pChaseCars[11], 10, 10);
+	GiveUsACar(MI_INTREPID, CVector(402.60809f, -917.49628f, 37.381001f), 90.0f, &pChaseCars[14], 34, 1);
 	GiveUsACar(MI_TAXI, CVector(-33.496201f, -938.4563f, 25.9781f), 266.0f, &pChaseCars[16], 6, 6);
-	GiveUsACar(MI_KURUMA, CVector(49.363098f, -987.60498f, 25.9781f), 0.0f, &pChaseCars[18], 51, 1);
+	GiveUsACar(MI_INTREPID, CVector(49.363098f, -987.60498f, 25.9781f), 0.0f, &pChaseCars[18], 51, 1);
 	GiveUsACar(MI_TAXI, CVector(179.0049f, -1154.6686f, 25.9781f), 0.0f, &pChaseCars[19], 6, 76);
-	GiveUsACar(MI_RUMPO, CVector(-28.9762f, -1031.3367f, 25.990601f), 242.0f, &pChaseCars[2], 1, 75);
-	GiveUsACar(MI_PATRIOT, CVector(114.1564f, -796.69379f, 24.978201f), 180.0f, &pChaseCars[3], 0, 0);
+	GiveUsACar(MI_RAMVAN, CVector(-28.9762f, -1031.3367f, 25.990601f), 242.0f, &pChaseCars[2], 1, 75);
+	GiveUsACar(MI_HUMVEE, CVector(114.1564f, -796.69379f, 24.978201f), 180.0f, &pChaseCars[3], 0, 0);
 }
 
 void CRecordDataForChase::CleanUpCarsForChaseScene(void)

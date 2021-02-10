@@ -358,7 +358,7 @@ CCarCtrl::GenerateOneRandomCar()
 	default:
 		break;
 	}
-	if (pVehicle && pVehicle->GetModelIndex() == MI_MRWHOOP)
+	if (pVehicle && pVehicle->GetModelIndex() == MI_ICECREAM)
 		pVehicle->m_bSirenOrAlarm = true;
 	pVehicle->AutoPilot.m_nNextPathNodeInfo = connectionId;
 	pVehicle->AutoPilot.m_nNextLane = pVehicle->AutoPilot.m_nCurrentLane = CGeneral::GetRandomNumber() % lanesOnCurrentRoad;
@@ -681,22 +681,22 @@ int32
 CCarCtrl::ChoosePoliceCarModel(void)
 {
 	if (FindPlayerPed()->m_pWanted->AreSwatRequired() &&
-		CStreaming::HasModelLoaded(MI_ENFORCER) &&
+		CStreaming::HasModelLoaded(MI_SWATVAN) &&
 		CStreaming::HasModelLoaded(MI_POLICE))
-		return ((CGeneral::GetRandomNumber() & 0xF) == 0) ? MI_ENFORCER : MI_POLICE;
+		return ((CGeneral::GetRandomNumber() & 0xF) == 0) ? MI_SWATVAN : MI_POLICE;
 	if (FindPlayerPed()->m_pWanted->AreFbiRequired() &&
 		CStreaming::HasModelLoaded(MI_FBICAR) &&
 		CStreaming::HasModelLoaded(MI_FBI))
 		return MI_FBICAR;
 	if(FindPlayerPed()->m_pWanted->AreArmyRequired() &&
-		CStreaming::HasModelLoaded(MI_RHINO) && 
-		CStreaming::HasModelLoaded(MI_BARRACKS) &&
+		CStreaming::HasModelLoaded(MI_TANK) && 
+		CStreaming::HasModelLoaded(MI_ARMYTRUCK) &&
 	    CStreaming::HasModelLoaded(MI_ARMY) &&
 		CStreaming::HasModelLoaded(MI_HUMVEE2)) {
 		int r = CGeneral::GetRandomNumberInRange(0, 3);
 		switch(r) {
-		case 1: return MI_BARRACKS;
-		case 2: return MI_RHINO;
+		case 1: return MI_ARMYTRUCK;
+		case 2: return MI_TANK;
 		case 3: return MI_ARMY;
 		default: return MI_HUMVEE2;
 		}
@@ -998,7 +998,7 @@ void CCarCtrl::SlowCarDownForPedsSectorList(CPtrList& lst, CVehicle* pVehicle, f
 			if (pPed->GetPedState() != PED_STEP_AWAY && pPed->GetPedState() != PED_DIVE_AWAY){
 				if (distanceUntilHit < movementTowardsPedPerSecond){
 					/* Very close. Time to evade. */
-					if (pVehicle->GetModelIndex() == MI_RCBANDIT){
+					if (pVehicle->GetModelIndex() == MI_RCBUG){
 						if (dotVelocity * GAME_SPEED_TO_METERS_PER_SECOND / 2 > distanceUntilHit)
 							pPed->SetEvasiveStep(pVehicle, 0);
 					}
@@ -2283,7 +2283,7 @@ void CCarCtrl::SteerAIBoatWithPhysics(CBoat* pBoat)
 
 float CCarCtrl::FindMaxSteerAngle(CVehicle* pVehicle)
 {
-	return pVehicle->GetModelIndex() == MI_ENFORCER ? 0.7f : DEFAULT_MAX_STEER_ANGLE;
+	return pVehicle->GetModelIndex() == MI_SWATVAN ? 0.7f : DEFAULT_MAX_STEER_ANGLE;
 }
 
 void CCarCtrl::SteerAICarWithPhysicsFollowPath(CVehicle* pVehicle, float* pSwerve, float* pAccel, float* pBrake, bool* pHandbrake)

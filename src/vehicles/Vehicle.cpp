@@ -530,7 +530,7 @@ CVehicle::ProcessWheel(CVector &wheelFwd, CVector &wheelRight, CVector &wheelCon
 
 		if(!bBraking){
 			if(m_fGasPedal < 0.01f){
-				if(GetModelIndex() == MI_RCBANDIT)
+				if(GetModelIndex() == MI_RCBUG)
 					brake = 0.2f * mod_HandlingManager.fWheelFriction / pHandling->fMass;
 				else
 					brake = mod_HandlingManager.fWheelFriction / pHandling->fMass;
@@ -872,10 +872,10 @@ CVehicle::IsLawEnforcementVehicle(void)
 	switch(GetModelIndex()){
 	case MI_FBICAR:
 	case MI_POLICE:
-	case MI_ENFORCER:
-	case MI_PREDATOR:
-	case MI_RHINO:
-	case MI_BARRACKS:
+	case MI_SWATVAN:
+	case MI_POLBOAT:
+	case MI_TANK:
+	case MI_ARMYTRUCK:
 	case MI_HUMVEE2:
 		return true;
 	default:
@@ -890,10 +890,10 @@ CVehicle::UsesSiren(uint32 id)
 	case MI_FIRETRUCK:
 	case MI_AMBULAN:
 	case MI_FBICAR:
-	case MI_MRWHOOP:
+	case MI_ICECREAM:
 	case MI_POLICE:
-	case MI_ENFORCER:
-	case MI_PREDATOR:
+	case MI_SWATVAN:
+	case MI_POLBOAT:
 		return true;
 	default:
 		return false;
@@ -910,16 +910,16 @@ CVehicle::IsVehicleNormal(void)
 	case MI_AMBULAN:
 	case MI_TAXI:
 	case MI_POLICE:
-	case MI_ENFORCER:
+	case MI_SWATVAN:
 	case MI_BUS:
-	case MI_RHINO:
-	case MI_BARRACKS:
+	case MI_TANK:
+	case MI_ARMYTRUCK:
 	case MI_HUMVEE2:
 	case MI_DODO:
 	case MI_COACH:
 	case MI_CABBIE:
-	case MI_RCBANDIT:
-	case MI_BORGNINE:
+	case MI_RCBUG:
+	case MI_CRUISER:
 		return false;
 	default:
 		return true;
@@ -1119,9 +1119,9 @@ CVehicle::SetDriver(CPed *driver)
 			CWorld::Players[CWorld::PlayerInFocus].m_nMoney += 25;
 		else if(GetModelIndex() == MI_POLICE)
 			driver->GiveWeapon(WEAPONTYPE_SHOTGUN, 5);
-		else if(GetModelIndex() == MI_ENFORCER)
+		else if(GetModelIndex() == MI_SWATVAN)
 			driver->m_fArmour = Max(driver->m_fArmour, 100.0f);
-		else if(GetModelIndex() == MI_CABBIE || GetModelIndex() == MI_BORGNINE)
+		else if(GetModelIndex() == MI_CABBIE || GetModelIndex() == MI_CRUISER)
 			CWorld::Players[CWorld::PlayerInFocus].m_nMoney += 25;
 		bFreebies = false;
 	}

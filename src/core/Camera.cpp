@@ -1578,7 +1578,7 @@ CCamera::CamControl(void)
 			if(pToGarageWeAreIn->m_eGarageType == GARAGE_BOMBSHOP1 ||
 			   pToGarageWeAreIn->m_eGarageType == GARAGE_BOMBSHOP2 ||
 			   pToGarageWeAreIn->m_eGarageType == GARAGE_BOMBSHOP3){
-				if(pTargetEntity->IsVehicle() && pTargetEntity->GetModelIndex() == MI_MRWHOOP &&
+				if(pTargetEntity->IsVehicle() && pTargetEntity->GetModelIndex() == MI_ICECREAM &&
 				   ReqMode != Cams[ActiveCam].Mode)
 					switchByJumpCut = true;
 			}
@@ -2515,7 +2515,7 @@ CCamera::IsItTimeForNewcam(int32 obbeMode, int32 time)
 	case OBBE_WHEEL:
 		veh = FindPlayerVehicle();
 		if(veh){
-			if(veh->IsBoat() || veh->GetModelIndex() == MI_RHINO)
+			if(veh->IsBoat() || veh->GetModelIndex() == MI_TANK)
 				return true;
 			if(!CWorld::GetIsLineOfSightClear(pTargetEntity->GetPosition(), Cams[ActiveCam].Source, true, false, false, false, false, false, false))
 				return true;
@@ -2665,7 +2665,7 @@ CCamera::TryToStartNewCamMode(int obbeMode)
 	switch(obbeMode){
 	case OBBE_WHEEL:
 		veh = FindPlayerVehicle();
-		if(veh == nil || veh->IsBoat() || veh->GetModelIndex() == MI_RHINO)
+		if(veh == nil || veh->IsBoat() || veh->GetModelIndex() == MI_TANK)
 			return false;
 		target = Multiply3x3(FindPlayerVehicle()->GetMatrix(), CVector(-1.4f, -2.3f, 0.3f));
 		target += FindPlayerVehicle()->GetPosition();

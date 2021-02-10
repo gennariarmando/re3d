@@ -2778,7 +2778,7 @@ CPed::PedAnimDoorCloseCB(CAnimBlendAssociation *animAssoc, void *arg)
 		} else {
 			if(animAssoc) animAssoc->blendDelta = -1000.0f;
 
-			if(veh->GetModelIndex() != MI_RHINO) {
+			if(veh->GetModelIndex() != MI_TANK) {
 
 				if(isLow)
 					ped->m_pVehicleAnim = CAnimManager::AddAnimation(ped->GetClump(), ASSOCGRP_STD, ANIM_STD_CAR_SHUFFLE_LO_RHS);
@@ -3663,7 +3663,7 @@ CPed::SetExitBoat(CVehicle *boat)
 	SetPedState(PED_IDLE);
 	CVector firstPos = GetPosition();
 	CAnimManager::BlendAnimation(GetClump(), m_animGroup, ANIM_STD_IDLE, 100.0f);
-	if (boat->GetModelIndex() == MI_SPEEDER && boat->IsUpsideDown()) {
+	if (boat->GetModelIndex() == MI_SPEEDBOAT && boat->IsUpsideDown()) {
 		m_pVehicleAnim = CAnimManager::BlendAnimation(GetClump(), ASSOCGRP_STD, ANIM_STD_CRAWLOUT_LHS, 8.0f);
 		m_pVehicleAnim->SetFinishCallback(PedSetOutCarCB, this);
 		m_vehDoor = CAR_DOOR_RF;
@@ -3787,7 +3787,7 @@ CPed::SetExitCar(CVehicle *veh, uint32 wantedDoorNode)
 	if ( veh->GetModelIndex() == MI_BUS )
 		optedDoorNode = CAR_DOOR_RF;
 
-	if(veh->GetModelIndex() == MI_RHINO)
+	if(veh->GetModelIndex() == MI_TANK)
 		optedDoorNode = CAR_DOOR_RR;
 
 	bool someoneExitsFromOurExitDoor = false;
@@ -4162,7 +4162,7 @@ CPed::GetNearestDoor(CVehicle *veh, CVector &posToOpen)
 		posToOpen = rfPos;
 	}
 
-	if(veh->GetModelIndex() == MI_RHINO) {
+	if(veh->GetModelIndex() == MI_TANK) {
 		m_vehDoor = CAR_DOOR_RR;
 		posToOpen = rrPos;
 	}
@@ -4182,7 +4182,7 @@ CPed::GetNearestPassengerDoor(CVehicle *veh, CVector &posToOpen)
 			m_vehDoor = CAR_DOOR_RF;
 			posToOpen = GetPositionToOpenCarDoor(veh, CAR_DOOR_RF);
 			return true;
-		case MI_RHINO:
+		case MI_TANK:
 			m_vehDoor = CAR_DOOR_RR;
 			posToOpen = GetPositionToOpenCarDoor(veh, CAR_DOOR_RR);
 			return true;
@@ -4250,7 +4250,7 @@ CPed::GetNearestPassengerDoor(CVehicle *veh, CVector &posToOpen)
 		posToOpen = rfPos;
 	}
 
-	if ( veh->GetModelIndex() == MI_RHINO )
+	if ( veh->GetModelIndex() == MI_TANK )
 	{
 		m_vehDoor = CAR_DOOR_RR;
 		posToOpen = rrPos;
@@ -4784,7 +4784,7 @@ CPed::RegisterThreatWithGangPeds(CEntity *attacker)
 	}
 
 	if (attackerPed && attackerPed->IsPlayer() && (attackerPed->m_nPedState == PED_CARJACK || attackerPed->bInVehicle)) {
-		if (!attackerPed->m_pMyVehicle || attackerPed->m_pMyVehicle->GetModelIndex() != MI_TOYZ) {
+		if (!attackerPed->m_pMyVehicle || attackerPed->m_pMyVehicle->GetModelIndex() != MI_LUTON2) {
 			int16 lastVehicle;
 			CEntity *vehicles[8];
 			CWorld::FindObjectsInRange(GetPosition(), ENTER_CAR_MAX_DIST, true, &lastVehicle, 6, vehicles, false, true, false, false, false);

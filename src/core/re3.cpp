@@ -771,12 +771,12 @@ SpawnCar(int id)
 		CWorld::Add(v);
 		((CAutomobile *)v)->PlaceOnRoadProperly();
 
-		if (v && bTrailer && id == MI_LINERUN) {
-			CStreaming::RequestModel(MI_YANKEE, 0);
+		if (v && bTrailer && id == MI_FREIGHT) {
+			CStreaming::RequestModel(MI_TANKER, 0);
 			CStreaming::LoadAllRequestedModels(false);
-			if(CStreaming::HasModelLoaded(MI_YANKEE)) {
+			if(CStreaming::HasModelLoaded(MI_TANKER)) {
 				CAutomobile *v2;
-				v2 = new CAutomobile(MI_YANKEE, RANDOM_VEHICLE);
+				v2 = new CAutomobile(MI_TANKER, RANDOM_VEHICLE);
 				v2->SetStatus(STATUS_ABANDONED);
 				v2->m_nDoorLock = CARLOCK_UNLOCKED;
 				CWorld::Add(v2);
@@ -887,7 +887,7 @@ static const char *carnames[] = {
 	"suv", "riviera", "boxsta", "freight", "nova", "beamer", "humvee", "firetruk", "garbage", "limo", "reliant", "lambo", "carrier", "transit",
 	"luton", "testeros", "ambulan", "fbicar", "astrovan", "eldorado", "taxi", "intrepid", "pickup", "icecream", "buggy", "corpse", "police", "swatvan",
 	"armour", "viper", "polboat", "bus", "tank", "armytruk", "train", "chopper", "dodo", "coach", "cabbie", "mustang", "ramvan", "rcbug",
-	"mafia", "humvee2", "fiat", "yardie", "yakuza", "impala", "columb", "hoods", "airtrain", "deaddodo", "speedboat", "fishboat", "panlant", "flatbed",
+	"mafia", "humvee2", "fiat", "yardie", "yakuza", "impala", "columb", "hoods", "aeroplane", "deaddodo", "speedboat", "fishboat", "panlant", "flatbed",
 	"tanker", "escape", "cruiser", "luton2", "ghost",
 };
 
@@ -1018,13 +1018,13 @@ DebugMenuPopulate(void)
 
 		DebugMenuAddCmd("Player", "Max Wanted level", []() { SetWantedLevel(); });
 
-		static int spawnCarId = MI_LANDSTAL;
-		e = DebugMenuAddVar("Spawn", "Spawn Car ID", &spawnCarId, nil, 1, MI_LANDSTAL, MI_GHOST, carnames);
+		static int spawnCarId = MI_SUV;
+		e = DebugMenuAddVar("Spawn", "Spawn Car ID", &spawnCarId, nil, 1, MI_SUV, MI_GHOST, carnames);
 		DebugMenuEntrySetWrap(e, true);
 		DebugMenuAddCmd("Spawn", "Spawn Car", [](){
 			if(spawnCarId == MI_TRAIN ||
 			   spawnCarId == MI_CHOPPER ||
-			   spawnCarId == MI_AIRTRAIN ||
+			   spawnCarId == MI_AEROPLANE ||
 			   spawnCarId == MI_DEADDODO ||
 			   spawnCarId == MI_ESCAPE)
 				return;
@@ -1033,22 +1033,22 @@ DebugMenuPopulate(void)
 		static uint8 dummy;
 		carCol1 = DebugMenuAddVar("Spawn", "First colour", &dummy, nil, 1, 0, 255, nil);
 		carCol2 = DebugMenuAddVar("Spawn", "Second colour", &dummy, nil, 1, 0, 255, nil);
-		DebugMenuAddCmd("Spawn", "Spawn Shark", [](){ SpawnCar(MI_STINGER); });
-		DebugMenuAddCmd("Spawn", "Spawn Dyablo", [](){ SpawnCar(MI_INFERNUS); });
-		DebugMenuAddCmd("Spawn", "Spawn Rocket", [](){ SpawnCar(MI_CHEETAH); });
-		DebugMenuAddCmd("Spawn", "Spawn Rumbler", [](){ SpawnCar(MI_BANSHEE); });
-		DebugMenuAddCmd("Spawn", "Spawn Esperanto", [](){ SpawnCar(MI_ESPERANT); });
-		DebugMenuAddCmd("Spawn", "Spawn Stallion", [](){ SpawnCar(MI_STALLION); });
-		DebugMenuAddCmd("Spawn", "Spawn Sentinal", [](){ SpawnCar(MI_KURUMA); });
-		DebugMenuAddCmd("Spawn", "Spawn Beamer", [](){ SpawnCar(MI_SENTINEL); });
+		DebugMenuAddCmd("Spawn", "Spawn Shark", [](){ SpawnCar(MI_BOXSTA); });
+		DebugMenuAddCmd("Spawn", "Spawn Dyablo", [](){ SpawnCar(MI_LAMBO); });
+		DebugMenuAddCmd("Spawn", "Spawn Rocket", [](){ SpawnCar(MI_TESTEROS); });
+		DebugMenuAddCmd("Spawn", "Spawn Rumbler", [](){ SpawnCar(MI_VIPER); });
+		DebugMenuAddCmd("Spawn", "Spawn Esperanto", [](){ SpawnCar(MI_ELDORADO); });
+		DebugMenuAddCmd("Spawn", "Spawn Stallion", [](){ SpawnCar(MI_MUSTANG); });
+		DebugMenuAddCmd("Spawn", "Spawn Sentinal", [](){ SpawnCar(MI_INTREPID); });
+		DebugMenuAddCmd("Spawn", "Spawn Beamer", [](){ SpawnCar(MI_BEAMER); });
 		DebugMenuAddCmd("Spawn", "Spawn Taxi", [](){ SpawnCar(MI_TAXI); });
 		DebugMenuAddCmd("Spawn", "Spawn Cop Car", [](){ SpawnCar(MI_POLICE); });
-		DebugMenuAddCmd("Spawn", "Spawn SWAT Van", [](){ SpawnCar(MI_ENFORCER); });
+		DebugMenuAddCmd("Spawn", "Spawn SWAT Van", [](){ SpawnCar(MI_SWATVAN); });
 		DebugMenuAddCmd("Spawn", "Spawn Dodo", [](){ SpawnCar(MI_DODO); });
-		DebugMenuAddCmd("Spawn", "Spawn PHUQ-2", [](){ SpawnCar(MI_RHINO); });
+		DebugMenuAddCmd("Spawn", "Spawn PHUQ-2", [](){ SpawnCar(MI_TANK); });
 		DebugMenuAddCmd("Spawn", "Spawn Fire Truck", [](){ SpawnCar(MI_FIRETRUCK); });
-		DebugMenuAddCmd("Spawn", "Spawn Police Boat", [](){ SpawnCar(MI_PREDATOR); });
-		DebugMenuAddCmd("Spawn", "Spawn Semi Cab with Tanker", []() { bTrailer = true; SpawnCar(MI_LINERUN); });
+		DebugMenuAddCmd("Spawn", "Spawn Police Boat", [](){ SpawnCar(MI_POLBOAT); });
+		DebugMenuAddCmd("Spawn", "Spawn Semi Cab with Tanker", []() { bTrailer = true; SpawnCar(MI_FREIGHT); });
 		DebugMenuAddCmd("Spawn", "Spawn random group of peds", []() { SpawnGroupOfRandomPeds(); });
 
 		DebugMenuAddVarBool8("Render", "Draw hud", &CHud::m_Wants_To_Draw_Hud, nil);

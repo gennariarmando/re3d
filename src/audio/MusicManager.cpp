@@ -62,11 +62,11 @@ cMusicManager::PlayerInCar()
 	switch (FindPlayerVehicle()->GetModelIndex()) {
 	case MI_FIRETRUCK:
 	case MI_AMBULAN:
-	case MI_MRWHOOP:
-	case MI_PREDATOR:
+	case MI_ICECREAM:
+	case MI_POLBOAT:
 	case MI_TRAIN:
-	case MI_SPEEDER:
-	case MI_REEFER:
+	case MI_SPEEDBOAT:
+	case MI_FISHBOAT:
 	case MI_GHOST: return false;
 	default: return true;
 	}
@@ -786,10 +786,10 @@ cMusicManager::UsesPoliceRadio(CVehicle *veh)
 	{
 	case MI_FBICAR:
 	case MI_POLICE:
-	case MI_ENFORCER:
-	case MI_PREDATOR:
-	case MI_RHINO:
-	case MI_BARRACKS:
+	case MI_SWATVAN:
+	case MI_POLBOAT:
+	case MI_TANK:
+	case MI_ARMYTRUCK:
 	case MI_HUMVEE2:
 		return true;
 	}

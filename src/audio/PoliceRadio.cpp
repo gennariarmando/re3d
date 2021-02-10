@@ -544,88 +544,88 @@ cAudioManager::SetupSuspectLastSeenReport()
 						main_color = SFX_POLICE_RADIO_BLUE;
 						color_pre_modifier = color_post_modifier = TOTAL_AUDIO_SAMPLES;
 #endif
-					case MI_LANDSTAL:
-					case MI_BLISTA: sample = SFX_POLICE_RADIO_CRUISER; break;
+					case MI_SUV:
+					case MI_CARRIER: sample = SFX_POLICE_RADIO_CRUISER; break;
 #ifdef FIX_BUGS
 					case MI_YARDIE:
 						color_pre_modifier = TOTAL_AUDIO_SAMPLES;
 						main_color = SFX_POLICE_RADIO_RED;
 						color_post_modifier = SFX_POLICE_RADIO_YELLOW;
 						sample = SFX_POLICE_RADIO_CONVERTIBLE; break;
-					case MI_DIABLOS:
+					case MI_IMPALA:
 						main_color = SFX_POLICE_RADIO_BLACK;
 #endif
-					case MI_IDAHO:
-					case MI_STALLION: sample = SFX_POLICE_RADIO_CONVERTIBLE; break;
+					case MI_RIVIERA:
+					case MI_MUSTANG: sample = SFX_POLICE_RADIO_CONVERTIBLE; break;
 #ifdef FIX_BUGS
 					case MI_YAKUZA:
 						color_pre_modifier = TOTAL_AUDIO_SAMPLES;
 						main_color = SFX_POLICE_RADIO_SILVER;
 						color_post_modifier = SFX_POLICE_RADIO_RED;
 #endif
-					case MI_STINGER:
-					case MI_INFERNUS:
-					case MI_CHEETAH:
-					case MI_BANSHEE: sample = SFX_POLICE_RADIO_SPORTS_CAR; break;
+					case MI_BOXSTA:
+					case MI_LAMBO:
+					case MI_TESTEROS:
+					case MI_VIPER: sample = SFX_POLICE_RADIO_SPORTS_CAR; break;
 #ifdef FIX_BUGS
 					case MI_FIAT:
 						color_pre_modifier = color_post_modifier = TOTAL_AUDIO_SAMPLES;
 						main_color = SFX_POLICE_RADIO_GREY;
-					case MI_KURUMA:
+					case MI_INTREPID:
 #endif
-					case MI_PEREN:
-					case MI_SENTINEL:
+					case MI_NOVA:
+					case MI_BEAMER:
 					case MI_FBICAR: sample = SFX_POLICE_RADIO_SALOON; break;
-					case MI_PATRIOT:
-					case MI_BOBCAT: sample = SFX_POLICE_RADIO_PICKUP; break;
+					case MI_HUMVEE:
+					case MI_PICKUPTRUCK: sample = SFX_POLICE_RADIO_PICKUP; break;
 					case MI_FIRETRUCK: sample = SFX_POLICE_RADIO_FIRE_TRUCK; break;
 #ifdef FIX_BUGS
-					case MI_LINERUN:
+					case MI_FREIGHT:
 					case MI_FLATBED:
 #endif
-					case MI_TRASH:
-					case MI_BARRACKS: sample = SFX_POLICE_RADIO_TRUCK; break;
-					case MI_STRETCH: sample = SFX_POLICE_RADIO_LIMO; break;
+					case MI_GARBAGE:
+					case MI_ARMYTRUCK: sample = SFX_POLICE_RADIO_TRUCK; break;
+					case MI_LIMO: sample = SFX_POLICE_RADIO_LIMO; break;
 #ifdef FIX_BUGS
 					case MI_CORPSE:
 #endif
-					case MI_MANANA:
-					case MI_ESPERANT: sample = SFX_POLICE_RADIO_2_DOOR; break;
+					case MI_RELIANT:
+					case MI_ELDORADO: sample = SFX_POLICE_RADIO_2_DOOR; break;
 #ifdef FIX_BUGS
 					case MI_HOODS:
 						color_pre_modifier = TOTAL_AUDIO_SAMPLES;
 						main_color = SFX_POLICE_RADIO_BLUE;
 						color_post_modifier = SFX_POLICE_RADIO_GREEN;
 					case MI_MAFIA:
-					case MI_YANKEE:
-					case MI_TOYZ:
+					case MI_TANKER:
+					case MI_LUTON2:
 					case MI_PANLANT:
 #endif
-					case MI_PONY:
-					case MI_MULE:
-					case MI_MOONBEAM:
-					case MI_ENFORCER:
-					case MI_SECURICA:
-					case MI_RUMPO: sample = SFX_POLICE_RADIO_VAN; break;
+					case MI_TRANSIT:
+					case MI_LUTON:
+					case MI_ASTROVAN:
+					case MI_SWATVAN:
+					case MI_ARMOURTRUCK:
+					case MI_RAMVAN: sample = SFX_POLICE_RADIO_VAN; break;
 					case MI_AMBULAN: sample = SFX_POLICE_RADIO_AMBULANCE; break;
 					case MI_TAXI:
 					case MI_CABBIE:
-					case MI_BORGNINE: sample = SFX_POLICE_RADIO_TAXI; break;
-					case MI_MRWHOOP:
+					case MI_CRUISER: sample = SFX_POLICE_RADIO_TAXI; break;
+					case MI_ICECREAM:
 						sample = SFX_POLICE_RADIO_ICE_CREAM_VAN;
 						break;
-					case MI_BFINJECT: sample = SFX_POLICE_RADIO_BUGGY; break;
+					case MI_BUGGY: sample = SFX_POLICE_RADIO_BUGGY; break;
 					case MI_HUMVEE2:
 					case MI_POLICE: sample = SFX_POLICE_RADIO_POLICE_CAR; break;
 #ifdef FIX_BUGS
-					case MI_SPEEDER:
-					case MI_REEFER:
+					case MI_SPEEDBOAT:
+					case MI_FISHBOAT:
 					case MI_GHOST:
 #endif
-					case MI_PREDATOR: sample = SFX_POLICE_RADIO_BOAT; break;
+					case MI_POLBOAT: sample = SFX_POLICE_RADIO_BOAT; break;
 					case MI_BUS:
 					case MI_COACH: sample = SFX_POLICE_RADIO_BUS; break;
-					case MI_RHINO:
+					case MI_TANK:
 						sample = SFX_POLICE_RADIO_TANK;
 						main_color = TOTAL_AUDIO_SAMPLES;
 						color_post_modifier = TOTAL_AUDIO_SAMPLES;

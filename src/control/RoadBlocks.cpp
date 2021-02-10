@@ -64,11 +64,11 @@ CRoadBlocks::GenerateRoadBlockCopsForCar(CVehicle* pVehicle, int32 roadBlockType
 			modelInfoId = MI_FBI;
 			copType = COP_FBI;
 			break;
-		case MI_ENFORCER:
+		case MI_SWATVAN:
 			modelInfoId = MI_SWAT;
 			copType = COP_SWAT;
 			break;
-		case MI_BARRACKS:
+		case MI_ARMYTRUCK:
 		case MI_HUMVEE2:
 			modelInfoId = MI_ARMY;
 			copType = COP_ARMY;
@@ -126,11 +126,11 @@ CRoadBlocks::GenerateRoadBlocks(void)
 					float fMapObjectRadius = 2.0f * mapObject->GetColModel()->boundingBox.max.x;
 					int32 vehicleId = MI_POLICE;
 					if (pPlayerWanted->AreArmyRequired())
-						vehicleId = MI_BARRACKS;
+						vehicleId = MI_ARMYTRUCK;
 					else if (pPlayerWanted->AreFbiRequired())
 						vehicleId = MI_FBICAR;
 					else if (pPlayerWanted->AreSwatRequired())
-						vehicleId = MI_ENFORCER;
+						vehicleId = MI_SWATVAN;
 					if (!CStreaming::HasModelLoaded(vehicleId))
 						vehicleId = MI_POLICE;
 					CColModel *pVehicleColModel = CModelInfo::GetModelInfo(vehicleId)->GetColModel();

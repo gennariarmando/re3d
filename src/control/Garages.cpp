@@ -106,12 +106,12 @@
 
 const int32 gaCarsToCollectInCraigsGarages[TOTAL_COLLECTCARS_GARAGES][TOTAL_COLLECTCARS_CARS] =
 {
-	{ MI_SECURICA, MI_MOONBEAM, MI_COACH,    MI_FLATBED,  MI_LINERUN,  MI_TRASH,    MI_PATRIOT,  MI_MRWHOOP,  MI_BLISTA,   MI_MULE,     MI_YANKEE,   MI_BOBCAT,   MI_DODO,     MI_BUS,      MI_RUMPO,    MI_PONY     },
-	{ MI_SENTINEL, MI_CHEETAH,  MI_BANSHEE,  MI_IDAHO,    MI_INFERNUS, MI_TAXI,     MI_KURUMA,   MI_STRETCH,  MI_PEREN,    MI_STINGER,  MI_MANANA,   MI_LANDSTAL, MI_STALLION, MI_BFINJECT, MI_CABBIE,   MI_ESPERANT },
-	{ MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_LANDSTAL, MI_CHEETAH,  MI_TAXI,     MI_ESPERANT, MI_SENTINEL, MI_IDAHO    }
+	{ MI_ARMOURTRUCK, MI_ASTROVAN, MI_COACH,    MI_FLATBED,  MI_FREIGHT,  MI_GARBAGE,    MI_HUMVEE,  MI_ICECREAM,  MI_CARRIER,   MI_LUTON,     MI_TANKER,   MI_PICKUPTRUCK,   MI_DODO,     MI_BUS,      MI_RAMVAN,    MI_TRANSIT     },
+	{ MI_BEAMER, MI_TESTEROS,  MI_VIPER,  MI_RIVIERA,    MI_LAMBO, MI_TAXI,     MI_INTREPID,   MI_LIMO,  MI_NOVA,    MI_BOXSTA,  MI_RELIANT,   MI_SUV, MI_MUSTANG, MI_BUGGY, MI_CABBIE,   MI_ELDORADO },
+	{ MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_SUV, MI_TESTEROS,  MI_TAXI,     MI_ELDORADO, MI_BEAMER, MI_RIVIERA    }
 };
 
-const int32 gaCarsToCollectIn60Seconds[] = { MI_CHEETAH, MI_TAXI, MI_ESPERANT, MI_SENTINEL, MI_IDAHO };
+const int32 gaCarsToCollectIn60Seconds[] = { MI_TESTEROS, MI_TAXI, MI_ELDORADO, MI_BEAMER, MI_RIVIERA };
 
 int32 CGarages::BankVansCollected;
 bool CGarages::BombsAreFree;
@@ -312,7 +312,7 @@ void CGarage::Update()
 				if (pVehicle) {
 					if (!IsEntityEntirelyOutside(pVehicle, 0.0f))
 						TheCamera.pToGarageWeAreInForHackAvoidFirstPerson = this;
-					if (pVehicle->GetModelIndex() == MI_MRWHOOP) {
+					if (pVehicle->GetModelIndex() == MI_ICECREAM) {
 						if (pVehicle->IsWithinArea(
 							m_fX1 - DISTANCE_FOR_MRWHOOP_HACK,
 							m_fY1 + DISTANCE_FOR_MRWHOOP_HACK,
@@ -688,7 +688,7 @@ void CGarage::Update()
 					case MI_POLICE:
 						reward = REWARD_FOR_FIRST_POLICE_CAR * (MAX_POLICE_CARS_TO_COLLECT - CGarages::PoliceCarsCollected++) / MAX_POLICE_CARS_TO_COLLECT;
 						break;
-					case MI_SECURICA:
+					case MI_ARMOURTRUCK:
 						reward = REWARD_FOR_FIRST_BANK_VAN * (MAX_BANK_VANS_TO_COLLECT - CGarages::BankVansCollected++) / MAX_BANK_VANS_TO_COLLECT;
 						break;
 #ifdef FIX_BUGS // not possible though
@@ -1432,10 +1432,10 @@ bool CGarages::IsCarSprayable(CVehicle * pVehicle)
 	case MI_FIRETRUCK:
 	case MI_AMBULAN:
 	case MI_POLICE:
-	case MI_ENFORCER:
+	case MI_SWATVAN:
 	case MI_BUS:
-	case MI_RHINO:
-	case MI_BARRACKS:
+	case MI_TANK:
+	case MI_ARMYTRUCK:
 	case MI_DODO:
 	case MI_COACH:
 	case MI_HUMVEE2:
@@ -1626,7 +1626,7 @@ bool CGarages::HasThisCarBeenCollected(int16 garage, uint8 id)
 bool CGarage::DoesCraigNeedThisCar(int32 mi)
 {
 	if (mi == MI_CORPSE)
-		mi = MI_MANANA;
+		mi = MI_RELIANT;
 	int ct = CGarages::GetCarsCollectedIndexForGarageType(m_eGarageType);
 	for (int i = 0; i < TOTAL_COLLECTCARS_CARS; i++) {
 		if (mi == gaCarsToCollectInCraigsGarages[ct][i])
@@ -1638,7 +1638,7 @@ bool CGarage::DoesCraigNeedThisCar(int32 mi)
 bool CGarage::HasCraigCollectedThisCar(int32 mi)
 {
 	if (mi == MI_CORPSE)
-		mi = MI_MANANA;
+		mi = MI_RELIANT;
 	int ct = CGarages::GetCarsCollectedIndexForGarageType(m_eGarageType);
 	for (int i = 0; i < TOTAL_COLLECTCARS_CARS; i++) {
 		if (mi == gaCarsToCollectInCraigsGarages[ct][i])
@@ -1650,7 +1650,7 @@ bool CGarage::HasCraigCollectedThisCar(int32 mi)
 bool CGarage::MarkThisCarAsCollectedForCraig(int32 mi)
 {
 	if (mi == MI_CORPSE)
-		mi = MI_MANANA;
+		mi = MI_RELIANT;
 	int ct = CGarages::GetCarsCollectedIndexForGarageType(m_eGarageType);
 	int index;
 	for (index = 0; index < TOTAL_COLLECTCARS_CARS; index++) {

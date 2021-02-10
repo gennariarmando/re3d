@@ -281,8 +281,8 @@ public:
 	bool IsAlarmOn(void) { return m_nAlarmState != 0 && m_nAlarmState != -1; }
 #endif
 	CVehicleModelInfo* GetModelInfo() { return (CVehicleModelInfo*)CModelInfo::GetModelInfo(GetModelIndex()); }
-	bool IsTaxi(void) { return GetModelIndex() == MI_TAXI || GetModelIndex() == MI_CABBIE || GetModelIndex() == MI_BORGNINE; }
-	AnimationId GetDriverAnim(void) { return IsCar() && bLowVehicle ? ANIM_STD_CAR_SIT_LO : (IsBoat() && GetModelIndex() != MI_SPEEDER ? ANIM_STD_BOAT_DRIVE : ANIM_STD_CAR_SIT); }
+	bool IsTaxi(void) { return GetModelIndex() == MI_TAXI || GetModelIndex() == MI_CABBIE || GetModelIndex() == MI_CRUISER; }
+	AnimationId GetDriverAnim(void) { return IsCar() && bLowVehicle ? ANIM_STD_CAR_SIT_LO : (IsBoat() && GetModelIndex() != MI_SPEEDBOAT ? ANIM_STD_BOAT_DRIVE : ANIM_STD_CAR_SIT); }
 
 	static bool bWheelsOnlyCheat;
 	static bool bAllDodosCheat;

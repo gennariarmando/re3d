@@ -1216,7 +1216,7 @@ int8 CRunningScript::ProcessCommands600To699(int32 command)
 		CVehicle* pVehicle = CPools::GetVehiclePool()->GetAt(ScriptParams[0]);
 		script_assert(pVehicle);
 		int mi = pVehicle->GetModelIndex();
-		UpdateCompareFlag(mi == MI_TAXI || mi == MI_CABBIE || mi == MI_BORGNINE);
+		UpdateCompareFlag(mi == MI_TAXI || mi == MI_CABBIE || mi == MI_CRUISER);
 		return 0;
 	}
 	case COMMAND_UNLOAD_SPECIAL_CHARACTER:

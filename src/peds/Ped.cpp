@@ -1334,7 +1334,7 @@ CPed::ScanForInterestingStuff(void)
 		for (int i = 0; i < lastVehicle; i++) {
 			CVehicle* veh = (CVehicle*)vehicles[i];
 
-			if (veh->GetModelIndex() == MI_MRWHOOP) {
+			if (veh->GetModelIndex() == MI_ICECREAM) {
 				if (veh->GetStatus() != STATUS_ABANDONED && veh->GetStatus() != STATUS_WRECKED) {
 					if ((GetPosition() - veh->GetPosition()).Magnitude() < 5.0f) {
 						SetObjective(OBJECTIVE_BUY_ICE_CREAM, veh);
@@ -6149,9 +6149,9 @@ CPed::SetEvasiveStep(CEntity *reason, uint8 animType)
 				animType = 1;
 		}
 	}
-	if (neededTurn <= DEGTORAD(90.0f) || veh->GetModelIndex() == MI_RCBANDIT || vehPressedHorn || animType != 0) {
+	if (neededTurn <= DEGTORAD(90.0f) || veh->GetModelIndex() == MI_RCBUG || vehPressedHorn || animType != 0) {
 		SetLookFlag(veh, true);
-		if ((CGeneral::GetRandomNumber() & 1) && veh->GetModelIndex() != MI_RCBANDIT && animType == 0) {
+		if ((CGeneral::GetRandomNumber() & 1) && veh->GetModelIndex() != MI_RCBUG && animType == 0) {
 			stepAnim = ANIM_STD_HAILTAXI;
 		} else {
 
@@ -6735,7 +6735,7 @@ CPed::SeekCar(void)
 {
 	CVehicle *vehToSeek = m_carInObjective;
 	CVector dest(0.0f, 0.0f, 0.0f);
-	if (!vehToSeek || vehToSeek->GetModelIndex() == MI_YANKEE) {
+	if (!vehToSeek || vehToSeek->GetModelIndex() == MI_TANKER) {
 		RestorePreviousState();
 		return;
 	}

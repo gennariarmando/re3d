@@ -180,7 +180,7 @@ CAutomobile::CAutomobile(int32 id, uint8 CreatedBy)
 	m_pBombRigger = nil;
 
 	if(m_nDoorLock == CARLOCK_UNLOCKED &&
-	   (id == MI_POLICE || id == MI_ENFORCER || id == MI_RHINO))
+	   (id == MI_POLICE || id == MI_SWATVAN || id == MI_TANK))
 		m_nDoorLock = CARLOCK_LOCKED_INITIALLY;
 
 	m_fCarGunLR = 0.0f;
@@ -201,7 +201,7 @@ CAutomobile::CAutomobile(int32 id, uint8 CreatedBy)
 		RpAtomicSetFlags((RpAtomic*)GetFirstObject(m_aCarNodes[CAR_WHEEL_RF]), 0);
 		RpAtomicSetFlags((RpAtomic*)GetFirstObject(m_aCarNodes[CAR_WHEEL_LB]), 0);
 		RpAtomicSetFlags((RpAtomic*)GetFirstObject(m_aCarNodes[CAR_WHEEL_RB]), 0);
-	}else if(GetModelIndex() == MI_RHINO){
+	}else if(GetModelIndex() == MI_TANK){
 		bExplosionProof = true;
 		bBulletProof = true;
 	}
@@ -270,10 +270,10 @@ CAutomobile::ProcessControl(void)
 		switch(GetModelIndex())
 		case MI_FBICAR:
 		case MI_POLICE:
-		case MI_ENFORCER:
-		case MI_SECURICA:
-		case MI_RHINO:
-		case MI_BARRACKS:
+		case MI_SWATVAN:
+		case MI_ARMOURTRUCK:
+		case MI_TANK:
+		case MI_ARMYTRUCK:
 		case MI_HUMVEE2:
 			ScanForCrimes();
 	}
@@ -345,7 +345,7 @@ CAutomobile::ProcessControl(void)
 			CRemote::TakeRemoteControlledCarFromPlayer();
 		}
 
-		if(GetModelIndex() == MI_RCBANDIT){
+		if(GetModelIndex() == MI_RCBUG){
 			CVector pos = GetPosition();
 			// FindPlayerCoors unused
 			if(RcbanditCheckHitWheels() || bIsInWater || CPopulation::IsPointInSafeZone(&pos)){
@@ -494,19 +494,19 @@ CAutomobile::ProcessControl(void)
 	case MI_FIRETRUCK:
 		FireTruckControl();
 		break;
-	case MI_RHINO:
+	case MI_TANK:
 		TankControl();
 		BlowUpCarsInPath();
 		break;
 	case MI_YARDIE:
-	case MI_ESPERANT:
+	case MI_ELDORADO:
 		HydraulicControl();
 		break;
-	case MI_LINERUN:
+	case MI_FREIGHT:
 		TowControl();
 		AddTowPoint(-TRAILER_FRONT_DISTANCE);
 		break;
-	case MI_YANKEE: 
+	case MI_TANKER: 
 		AddTowPoint(TRAILER_FRONT_DISTANCE);
 		break;
 	default:
@@ -1002,7 +1002,7 @@ CAutomobile::ProcessControl(void)
 		if(GetStatus() != STATUS_PLAYER){
 			ReduceHornCounter();
 		}else{
-			if(GetModelIndex() == MI_MRWHOOP){
+			if(GetModelIndex() == MI_ICECREAM){
 				if(Pads[0].bHornHistory[Pads[0].iCurrHornHistory] &&
 				   !Pads[0].bHornHistory[(Pads[0].iCurrHornHistory+4) % 5]){
 					m_bSirenOrAlarm = !m_bSirenOrAlarm;
@@ -1125,7 +1125,7 @@ CAutomobile::ProcessControl(void)
 
 
 	if(m_bSirenOrAlarm && (CTimer::GetFrameCounter()&7) == 5 &&
-	   UsesSiren(GetModelIndex()) && GetModelIndex() != MI_MRWHOOP)
+	   UsesSiren(GetModelIndex()) && GetModelIndex() != MI_ICECREAM)
 		CCarAI::MakeWayForCarWithSiren(this);
 
 
@@ -1253,7 +1253,7 @@ CAutomobile::PreRender(void)
 	int i, j, n;
 	CVehicleModelInfo *mi = (CVehicleModelInfo*)CModelInfo::GetModelInfo(GetModelIndex());
 
-	if(GetModelIndex() == MI_RCBANDIT){
+	if(GetModelIndex() == MI_RCBUG){
 		CVector pos = GetMatrix() * CVector(0.218f, -0.444f, 0.391f);
 		CAntennas::RegisterOne((uintptr)this, GetUp(), pos, 1.0f);
 	}
@@ -1265,7 +1265,7 @@ CAutomobile::PreRender(void)
 
 	if(GetModelIndex() == MI_DODO){
 		; // nothing
-	}else if(GetModelIndex() == MI_RCBANDIT){
+	}else if(GetModelIndex() == MI_RCBUG){
 		for(i = 0; i < 4; i++){
 			// Game has same code three times here
 			switch(m_aWheelState[i]){
@@ -1496,7 +1496,7 @@ CAutomobile::PreRender(void)
 	case MI_FIRETRUCK:
 	case MI_AMBULAN:
 	case MI_POLICE:
-	case MI_ENFORCER:
+	case MI_SWATVAN:
 		if(m_bSirenOrAlarm){
 			CVector pos1, pos2;
 			uint8 r1, g1, b1;
@@ -1522,7 +1522,7 @@ CAutomobile::PreRender(void)
 				r1 = 255; g1 = 0; b1 = 0;
 				r2 = 0; g2 = 0; b2 = 255;
 				break;
-			case MI_ENFORCER:
+			case MI_SWATVAN:
 				pos1 = CVector(1.1f,  0.8f, 1.2f);
 				pos2 = CVector(-1.1f, 0.8f, 1.2f);
 				r1 = 255; g1 = 0; b1 = 0;
@@ -1615,7 +1615,7 @@ CAutomobile::PreRender(void)
 
 	case MI_TAXI:
 	case MI_CABBIE:
-	case MI_BORGNINE:
+	case MI_CRUISER:
 		if(bTaxiLight){
 			CVector pos = GetPosition() + GetUp()*0.95f;
 			CCoronas::RegisterCorona((uintptr)this + 21,
@@ -1631,7 +1631,7 @@ CAutomobile::PreRender(void)
 		break;
 	}
 
-	if(GetModelIndex() != MI_RCBANDIT && GetModelIndex() != MI_DODO /*&&
+	if(GetModelIndex() != MI_RCBUG && GetModelIndex() != MI_DODO /*&&
 	   GetModelIndex() != MI_RHINO*/) {
 	// Process lights
 
@@ -1686,7 +1686,7 @@ CAutomobile::PreRender(void)
 		lightL -= GetRight()*2.0f*headLightPos.x;
 
 		// Headlight coronas
-		if(GetModelIndex() != MI_YANKEE) {
+		if(GetModelIndex() != MI_TANKER) {
 			if(behindness < 0.0f) {
 				// In front of car
 				float intensity = -0.5f * behindness + 0.3f;
@@ -1846,7 +1846,7 @@ CAutomobile::PreRender(void)
 				float f = headLightPos.y + 6.0f;
 				pos += CVector(f * fwd.x, f * fwd.y, 2.0f);
 
-						if(GetModelIndex() != MI_YANKEE) {
+						if(GetModelIndex() != MI_TANKER) {
 
 					if(Damage.GetLightStatus(VEHLIGHT_FRONT_LEFT) == LIGHT_STATUS_OK ||
 					   Damage.GetLightStatus(VEHLIGHT_FRONT_RIGHT) == LIGHT_STATUS_OK)
@@ -1863,7 +1863,7 @@ CAutomobile::PreRender(void)
 		}
 
 		if((this == FindPlayerVehicle() || (FindPlayerVehicle() && this == ((CAutomobile *)FindPlayerVehicle())->m_pLinkedVehicle)) && !alarmOff) {
-			if(GetModelIndex() != MI_YANKEE) {
+			if(GetModelIndex() != MI_TANKER) {
 				if(Damage.GetLightStatus(VEHLIGHT_FRONT_LEFT) == LIGHT_STATUS_OK ||
 				   Damage.GetLightStatus(VEHLIGHT_FRONT_RIGHT) == LIGHT_STATUS_OK)
 					CPointLights::AddLight(CPointLights::LIGHT_DIRECTIONAL, GetPosition(), GetForward(), 20.0f, 1.0f, 1.0f, 1.0f,
@@ -1957,7 +1957,7 @@ CAutomobile::Render(void)
 	CVector pos;
 	CVehicleModelInfo *mi = (CVehicleModelInfo*)CModelInfo::GetModelInfo(GetModelIndex());
 
-	if(GetModelIndex() == MI_RHINO && m_aCarNodes[CAR_BONNET]){
+	if(GetModelIndex() == MI_TANK && m_aCarNodes[CAR_BONNET]){
 		// Rotate Rhino turret
 		CMatrix m;
 		CVector p;
@@ -2089,7 +2089,7 @@ CAutomobile::Render(void)
 
 		ProcessSwingingDoor(CAR_DOOR_LF, DOOR_FRONT_LEFT);
 		ProcessSwingingDoor(CAR_DOOR_RF, DOOR_FRONT_RIGHT);
-	}else if(GetModelIndex() == MI_RHINO){
+	}else if(GetModelIndex() == MI_TANK){
 		// Front right wheel
 		mat.Attach(RwFrameGetMatrix(m_aCarNodes[CAR_WHEEL_RF]));
 		pos.x = mat.GetPosition().x;
@@ -3425,7 +3425,7 @@ CAutomobile::VehicleDamage(float impulse, uint16 damagedPiece)
 
 		float damage = (impulse-25.0f)*pHandling->fCollisionDamageMultiplier*0.6f*damageMultiplier;
 
-		if(GetModelIndex() == MI_SECURICA && m_pDamageEntity && m_pDamageEntity->GetStatus() == STATUS_PLAYER)
+		if(GetModelIndex() == MI_ARMOURTRUCK && m_pDamageEntity && m_pDamageEntity->GetStatus() == STATUS_PLAYER)
 			damage *= 7.0f;
 
 		if(damage > 0.0f){
@@ -3460,7 +3460,7 @@ CAutomobile::VehicleDamage(float impulse, uint16 damagedPiece)
 				m_pSetOnFireEntity->RegisterReference(&m_pSetOnFireEntity);
 		}
 	}else{
-		if(GetModelIndex() == MI_BFINJECT){
+		if(GetModelIndex() == MI_BUGGY){
 			if(m_fHealth < 400.0f)
 				Damage.SetEngineStatus(200);
 			else if(m_fHealth < 600.0f)
@@ -3535,7 +3535,7 @@ CAutomobile::AddDamagedVehicleParticles(void)
 		break;
 	}
 
-	if(GetModelIndex() == MI_BFINJECT)
+	if(GetModelIndex() == MI_BUGGY)
 		damagePos = CVector(0.3f, -1.5f, -0.1f);
 
 	damagePos = GetMatrix()*damagePos;
@@ -3865,7 +3865,7 @@ CAutomobile::BlowUpCar(CEntity *culprit)
 	m_nTimeOfDeath = CTimer::GetTimeInMilliseconds();
 	Damage.FuckCarCompletely();
 
-	if(GetModelIndex() != MI_RCBANDIT){
+	if(GetModelIndex() != MI_RCBUG){
 		SetBumperDamage(CAR_BUMP_FRONT, VEHBUMPER_FRONT);
 		SetBumperDamage(CAR_BUMP_REAR, VEHBUMPER_REAR);
 		SetDoorDamage(CAR_BONNET, DOOR_BONNET);
@@ -3932,7 +3932,7 @@ CAutomobile::BlowUpCar(CEntity *culprit)
 
 	gFireManager.StartFire(this, culprit, 0.8f, true);
 	CDarkel::RegisterCarBlownUpByPlayer(this);
-	if(GetModelIndex() == MI_RCBANDIT)
+	if(GetModelIndex() == MI_RCBUG)
 		CExplosion::AddExplosion(this, culprit, EXPLOSION_CAR_QUICK, GetPosition(), 0);
 	else
 		CExplosion::AddExplosion(this, culprit, EXPLOSION_CAR, GetPosition(), 0);
@@ -4147,7 +4147,7 @@ CAutomobile::SetupSuspensionLines(void)
 	if(colModel->boundingSphere.radius < radius)
 		colModel->boundingSphere.radius = radius;
 
-	if(GetModelIndex() == MI_RCBANDIT){
+	if(GetModelIndex() == MI_RCBUG){
 		colModel->boundingSphere.radius = 2.0f;
 		for(i = 0; i < colModel->numSpheres; i++)
 			colModel->spheres[i].radius = 0.3f;
@@ -4174,7 +4174,7 @@ CAutomobile::BlowUpCarsInPath(void)
 		for(i = 0; i < m_nCollisionRecords; i++)
 			if(m_aCollisionRecords[i] &&
 			   m_aCollisionRecords[i]->IsVehicle() &&
-			   m_aCollisionRecords[i]->GetModelIndex() != MI_RHINO &&
+			   m_aCollisionRecords[i]->GetModelIndex() != MI_TANK &&
 			   !m_aCollisionRecords[i]->bRenderScorched)
 				((CVehicle*)m_aCollisionRecords[i])->BlowUpCar(this);
 }
@@ -4873,7 +4873,7 @@ CAutomobile::ScanForTowLink()
 	for(int i = 0; i < lastVehicle; i++) {
 		CVehicle *nearVeh = (CVehicle *)vehicles[i];
 
-		if(nearVeh->GetStatus() != STATUS_WRECKED && nearVeh->GetModelIndex() == MI_YANKEE) { foundVeh = nearVeh; }
+		if(nearVeh->GetStatus() != STATUS_WRECKED && nearVeh->GetModelIndex() == MI_TANKER) { foundVeh = nearVeh; }
 	}
 
 	if(!foundVeh)

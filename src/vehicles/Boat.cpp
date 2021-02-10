@@ -150,7 +150,7 @@ CBoat::ProcessControl(void)
 		m_bIsAnchored = false;
 		m_fOrientation = INVALID_ORIENTATION;
 		ProcessControlInputs(0);
-		if(GetModelIndex() == MI_PREDATOR)
+		if(GetModelIndex() == MI_POLBOAT)
 			DoFixedMachineGuns();
 		break;
 	case STATUS_SIMPLE:
@@ -219,16 +219,16 @@ CBoat::ProcessControl(void)
 		CVector smokeDir = 0.8f*m_vecMoveSpeed;
 		CVector smokePos;
 		switch(GetModelIndex()){
-		case MI_SPEEDER:
+		case MI_SPEEDBOAT:
 			smokePos = CVector(0.4f, -2.4f, 0.8f);
 			smokeDir += 0.05f*GetRight();
 			smokeDir.z += 0.2f*m_vecMoveSpeed.z;
 			break;
-		case MI_REEFER:
+		case MI_FISHBOAT:
 			smokePos = CVector(2.0f, -1.0f, 0.5f);
 			smokeDir += 0.07f*GetRight();
 			break;
-		case MI_PREDATOR:
+		case MI_POLBOAT:
 		default:
 			smokePos = CVector(-1.5f, -0.5f, 1.2f);
 			smokeDir += -0.08f*GetRight();
@@ -740,19 +740,19 @@ CBoat::RenderWaterOutPolys(void)
 	RwIm3DVertexSetRGBA(&KeepWaterOutVertices[2], 255, 255, 255, 255);
 	RwIm3DVertexSetRGBA(&KeepWaterOutVertices[3], 255, 255, 255, 255);
 	switch (GetModelIndex()) {
-	case MI_SPEEDER:
+	case MI_SPEEDBOAT:
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[0], -1.15f, 3.61f, 1.03f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[1],  1.15f, 3.61f, 1.03f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[2], -1.15f, 0.06f, 1.03f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[3],  1.15f, 0.06f, 1.03f);
 		break;
-	case MI_REEFER:
+	case MI_FISHBOAT:
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[0], -1.9f,   2.83f, 1.0f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[1],  1.9f,   2.83f, 1.0f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[2], -1.66f, -4.48f, 0.83f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[3],  1.66f, -4.48f, 0.83f);
 		break;
-	case MI_PREDATOR:
+	case MI_POLBOAT:
 	default:
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[0], -1.45f,   1.9f, 0.96f);
 		RwIm3DVertexSetPos(&KeepWaterOutVertices[1],  1.45f,   1.9f, 0.96f);

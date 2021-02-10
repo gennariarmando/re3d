@@ -4072,7 +4072,7 @@ int8 CRunningScript::ProcessCommands200To299(int32 command)
 		CVector pos = *(CVector*)&ScriptParams[1];
 		if (pos.z <= MAP_Z_LOW_LIMIT)
 			pos.z = CWorld::FindGroundZForCoord(pos.x, pos.y);
-		CRemote::GivePlayerRemoteControlledCar(pos.x, pos.y, pos.z, DEGTORAD(*(float*)&ScriptParams[4]), MI_RCBANDIT);
+		CRemote::GivePlayerRemoteControlledCar(pos.x, pos.y, pos.z, DEGTORAD(*(float*)&ScriptParams[4]), MI_RCBUG);
 		return 0;
 	}
 	case COMMAND_ALTER_WANTED_LEVEL:
