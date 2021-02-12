@@ -3518,7 +3518,7 @@ CPed::SetEnterCar_AllClear(CVehicle *car, uint32 doorNode, uint32 doorFlag)
 	if (car->IsBoat()) {
 #ifdef VC_PED_PORTS
 		// VC checks for handling flag, but we can't do that
-		if(car->GetModelIndex() == MI_SPEEDER)
+		if(car->GetModelIndex() == MI_SPEEDBOAT)
 			m_pVehicleAnim = CAnimManager::BlendAnimation(GetClump(), ASSOCGRP_STD, ANIM_STD_CAR_SIT, 100.0f);
 		else
 			m_pVehicleAnim = CAnimManager::BlendAnimation(GetClump(), ASSOCGRP_STD, ANIM_STD_BOAT_DRIVE, 100.0f);

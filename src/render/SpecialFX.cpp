@@ -718,7 +718,7 @@ C3dMarkers::PlaceBigArrow(CVector &posTarget)
 			m_vecArrowPoint.z = interpF(m_vecArrowPoint.z, interpPoint.z, CTimer::GetTimeStep() * 0.2f);
 
 			if (isNearlyEqualF(m_vecArrowPoint.x, interpPoint.x, 0.1f) &&
-				isNearlyEqualF(m_vecArrowPoint.x, interpPoint.y, 0.1f))
+				isNearlyEqualF(m_vecArrowPoint.y, interpPoint.y, 0.1f))
 				interp = false;
 		}
 		else
