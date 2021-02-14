@@ -466,7 +466,7 @@ int32 C3dMarkers::NumActiveMarkers;
 RpClump* C3dMarkers::m_pRpClumpArray[NUMMARKERTYPES];
 
 float C3dMarkers::m_fBigArrowAlpha;
-bool C3dMarkers::m_fShow;
+bool C3dMarkers::m_bShow;
 CVector C3dMarkers::m_vecArrowPoint;
 
 void
@@ -704,11 +704,11 @@ C3dMarkers::PlaceBigArrow(CVector &posTarget)
 		}
 		CVector a = CVector(plr.x - clamp((distX / dist), -4.0f, 4.0f), plr.y - clamp((distY / dist), -4.0f, 4.0f), plr.z);
 		CVector b = posTarget;
-		CVector interpPoint = (dist > 14.0f ? a : b);
+		CVector interpPoint = (dist > 10.0f ? a : b);
 		static bool interp = false;
 
-		if (!interp && (dist > 0.0f && dist < 14.0f + 1.0f)) {
-			interpPoint = (dist > 14.0f ? a : b);
+		if (!interp && (dist > 0.0f && dist < 10.0f + 1.0f)) {
+			interpPoint = (dist > 10.0f ? a : b);
 			interp = true;
 		}
 
@@ -761,20 +761,19 @@ C3dMarkers::PlaceBigArrow(CVector &posTarget)
 		z = 90.0f;
 
 		if((FindPlayerPed()->GetPosition() - posTarget).Magnitude2D() > 7.0f)
-			m_fShow = true;
+			m_bShow = true;
 		else
-			m_fShow = false;
+			m_bShow = false;
 
-		if(m_fShow) {
+		if (m_bShow)
 			m_fBigArrowAlpha += frameTime * 0.2f * (frameTime / 30.0f);
-			m_fBigArrowAlpha = clamp(m_fBigArrowAlpha, 0, 255);
-		} else {
+		else
 			m_fBigArrowAlpha += frameTime * -0.2f * (frameTime / 30.0f);
-			m_fBigArrowAlpha = clamp(m_fBigArrowAlpha, 0, 255);
-		}
+
+		m_fBigArrowAlpha = clamp(m_fBigArrowAlpha, 0, 255);
 
 		color.alpha = static_cast<uint8>(m_fBigArrowAlpha);
-
+	
 		if(frame) {
 			RpMaterialSetColor(RpGeometryGetMaterial(geometry, 0), &color);
 			RwFrameTransform(frame, RwFrameGetMatrix(RwCameraGetFrame(Scene.camera)), rwCOMBINEREPLACE);
